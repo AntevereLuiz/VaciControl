@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "oGg98zOqpbN3yb4IUfCZBOIoLQMXbbbYsEz8gK9HYwHl7drIz32MaSnj6edFnmQ0L8zPXbY0JOQeKIeSRnRdcg==",
+  "success": true,
+  "projectFilePath": "C:\\VaciControl\\VaciControl\\VaciControlUI\\VaciControlUI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lcant\\.nuget\\packages\\microsoft.aspnetcore.spaservices.extensions\\5.0.9\\microsoft.aspnetcore.spaservices.extensions.5.0.9.nupkg.sha512",
+    "C:\\Users\\lcant\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\lcant\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\5.0.0\\microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512",
+    "C:\\Users\\lcant\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\5.0.0\\microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512",
+    "C:\\Users\\lcant\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
