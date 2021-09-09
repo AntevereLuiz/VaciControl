@@ -1,1 +1,61 @@
-<p>manufacturer-list works!</p>
+<div class="row mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Fabricantes
+        </h1>
+    </div>
+    <div class="col-md text-end">
+        <a routerLink="new" class="btn btn-success">
+            + Novo
+        </a>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-primary text-light">
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>E-mail</th>
+            <th>Ações</th>           
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr> <!--APAGAR DEPOIS-->
+            <td>
+                <strong>TESTE</strong>                
+            </td>                 
+            <td>
+                <strong>TESTE</strong>                
+            </td> 
+            <td>
+                <strong>TESTE</strong>                
+            </td> 
+            <td>
+                <a [routerLink]="['edit', 1]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a class="btn btn-outline-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+
+    <!--" 
+    <tbody>
+        <tr *ngFor="let manufacturer of manufacturers">
+            <td>
+                <small>{{ manufacturer.nome }}</small>
+            </td>
+            <td>
+                <small>{{ manufacturer.cnpj }}</small>
+            </td>
+            <td>
+                <small>{{ manufacturer.email }}</small>
+            </td>            
+            <td>
+                <a [routerLink]="['edit', manufacturer.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a class="btn btn-outline-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    </tbody> 
+   "-->
+</table>

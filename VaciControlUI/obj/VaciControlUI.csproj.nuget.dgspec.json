@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\VaciControl\\VaciControl\\VaciControlUI\\VaciControlUI.csproj",
         "projectName": "VaciControlUI",
         "projectPath": "C:\\VaciControl\\VaciControl\\VaciControlUI\\VaciControlUI.csproj",
-        "packagesPath": "C:\\Users\\lcant\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Windows 10 H SL X-64\\.nuget\\packages\\",
         "outputPath": "C:\\VaciControl\\VaciControl\\VaciControlUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lcant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Windows 10 H SL X-64\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
