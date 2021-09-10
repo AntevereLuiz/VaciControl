@@ -19,12 +19,29 @@
             <th>E-mail</th>
             <th>Ações</th>           
         </tr>
-    </thead>
-
+    </thead>         
     <tbody>
-        <tr> <!--APAGAR DEPOIS-->
+        <tr *ngFor="let manufacturers of manufacturers">
             <td>
-                <strong>TESTE</strong>                
+                <small>{{ manufacturers.nome }}</small>
+            </td>
+            <td>
+                <small>{{ manufacturers.cnpj }}</small>
+            </td>
+            <td>
+                <small>{{ manufacturers.email }}</small>
+            </td>            
+            <td>
+                <a [routerLink]="['edit', manufacturers.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a class="btn btn-outline-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+    <!--"
+    <tbody>
+        <tr>
+            <td>
+                <strong>TESTE - APAGAR DEPOIS</strong>                
             </td>                 
             <td>
                 <strong>TESTE</strong>                
@@ -38,24 +55,6 @@
             </td>
         </tr>
     </tbody>
-
-    <!--" 
-    <tbody>
-        <tr *ngFor="let manufacturer of manufacturers">
-            <td>
-                <small>{{ manufacturer.nome }}</small>
-            </td>
-            <td>
-                <small>{{ manufacturer.cnpj }}</small>
-            </td>
-            <td>
-                <small>{{ manufacturer.email }}</small>
-            </td>            
-            <td>
-                <a [routerLink]="['edit', manufacturer.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
-                <a class="btn btn-outline-danger btn-sm">Excluir</a>
-            </td>
-        </tr>
-    </tbody> 
-   "-->
+    "-->
+   
 </table>

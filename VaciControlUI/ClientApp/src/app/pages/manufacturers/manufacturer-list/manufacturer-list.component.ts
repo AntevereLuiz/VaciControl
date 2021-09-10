@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Manufacturer } from '../models/manufacturer.model';
+import { ManufacturerService } from '../services/manufacturer.service';
+
 @Component({
   selector: 'app-manufacturer-list',
   templateUrl: './manufacturer-list.component.html',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManufacturerListComponent implements OnInit {
 
-  constructor() { }
+  manufacturers: Manufacturer[] = [];
 
+  constructor(private manufacturerService: ManufacturerService) { }
+  
   ngOnInit(): void {
+    this.manufacturerService.getAll().subscribe(
+      manufacturers => this.manufacturers = manufacturers,
+      error => alert(`Erro: ${error}`)
+    )
   }
 
 }
