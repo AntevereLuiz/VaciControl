@@ -16,9 +16,27 @@ export class UserListComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll(){
     this.userService.getAll().subscribe(
       users => this.users = users,
-      error => alert(`Erro errado: ${error}`)
+      error => alert(`Erro ao listar os usuários: ${error}`)
     )
+  }
+
+  delete(user : User){
+    const mustDelete = confirm('Realmente deseja inativar esse usuário?');
+
+    if(mustDelete){
+      this.userService.delete(user).subscribe(
+        () => {
+          alert('O usuário foi inativado!');
+          this.getAll();
+        },
+        () => toastr.error('Erro ao tentar excluir!'),
+      )
+    }
   }
 }

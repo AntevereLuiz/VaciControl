@@ -20,14 +20,14 @@ namespace VaciControl.Controllers
         [HttpGet]
         public ActionResult<List<UserDto>> GetAll()
         {
-            var ativos = _userService.GetAllWithConditions(x => x.Status);
+            var users = _userService.GetAll();
 
-            if (ativos == null)
+            if (users == null)
             {
                 return BadRequest();
             }
 
-            return Ok(ativos);
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
