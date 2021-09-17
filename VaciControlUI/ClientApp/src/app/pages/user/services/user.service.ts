@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, mergeMap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,43 @@ export class UserService {
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(this.apiPath).pipe(
       catchError(this.handleError),
-      map(this.jsonToModel)
+      map(this.jsonToUsers)
     )
   }
 
-  jsonToModel(json: any[]): User[] {
+  getById(id: Guid) : Observable<User> {
+    return this.http.get(`${this.apiPath}/${id}`).pipe(
+      catchError(this.handleError),
+      map(this.jsonToUser)
+    );
+  }
+
+  create(user: User) : Observable<User> {
+    return this.http.post(this.apiPath, user).pipe(
+      catchError(this.handleError),
+      map(this.jsonToUser)
+    );
+  }
+
+  update(user: User) : Observable<User> {
+    return this.http.put(`${this.apiPath}/${user.id}`, user).pipe(
+      catchError(this.handleError),
+      map(() => user)
+    );
+  }
+
+  delete(user: User) : Observable<any> {
+    return this.http.put(`${this.apiPath}/remove/${user.id}`, user).pipe(
+      catchError(this.handleError),
+      map(() => null)
+    );
+  }
+
+  private jsonToUser(json: any): User {
+    return json as User;
+  }
+
+  private jsonToUsers(json: any[]): User[] {
     const user: User[] = [];
     json.forEach(element => {
       user.push(element as User);
@@ -31,7 +64,7 @@ export class UserService {
     return user;
   }
 
-  handleError(error: any): Observable<any> {
+  private handleError(error: any): Observable<any> {
     console.log(error);
     return throwError(error);
   }

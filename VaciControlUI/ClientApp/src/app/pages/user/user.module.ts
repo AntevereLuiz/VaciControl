@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { SharedModule } from '../../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IMaskModule } from 'angular-imask';
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { UserFormComponent } from './user-form/user-form.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+    IMaskModule
   ]
 })
 export class UserModule { }

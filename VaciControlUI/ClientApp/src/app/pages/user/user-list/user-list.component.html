@@ -6,7 +6,7 @@
     </div>
     <div class="col-md text-end">
         <a routerLink="new" class="btn btn-success">
-            + Nova Categoria
+            + Novo Usuário
         </a>
     </div>
 </div>
@@ -33,11 +33,11 @@
                 <small>{{ user.email }}</small>
             </td>
             <td>
-                <small>{{ user.status }}</small>
+                <small>{{ user.status! | ativoinativo }}</small>
             </td>
             <td>
                 <a [routerLink]="['edit', user.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
-                <a class="btn btn-outline-danger btn-sm">Excluir</a>
+                <a (click)="delete(user)" class="btn btn-outline-danger btn-sm">Inativar</a>
             </td>
         </tr>
     </tbody>
