@@ -9,6 +9,7 @@ namespace VaciControl.Mapper
         public Mappers()
         {
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Manufacturer, ManufacturerDto>().ReverseMap();
         }
     }
 }

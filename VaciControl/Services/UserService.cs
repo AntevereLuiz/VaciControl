@@ -23,7 +23,7 @@ namespace VaciControl.Services
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
             _mapper = mapper;
-    }
+        }
 
         public void Delete(UserDto userDto)
         {

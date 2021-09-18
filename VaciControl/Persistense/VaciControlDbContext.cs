@@ -11,5 +11,6 @@ namespace VaciControl.Persistense
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
     }
 }
