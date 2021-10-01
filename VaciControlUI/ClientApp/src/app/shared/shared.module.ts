@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AtivoInativoPipe } from './pipes/ativoinativo.pipe';
+import { FormatadataPipe } from './pipes/formatadata.pipe';
 
 
 @NgModule({
   declarations: [
-    AtivoInativoPipe
+    AtivoInativoPipe,
+    FormatadataPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    AtivoInativoPipe
+    AtivoInativoPipe,
+    FormatadataPipe
   ]
 })
 export class SharedModule { }

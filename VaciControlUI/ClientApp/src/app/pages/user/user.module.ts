@@ -5,7 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { SharedModule } from '../../shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 
 
@@ -19,7 +19,8 @@ import { IMaskModule } from 'angular-imask';
     UserRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    IMaskModule
+    IMaskModule,
+    FormsModule
   ]
 })
 export class UserModule { }

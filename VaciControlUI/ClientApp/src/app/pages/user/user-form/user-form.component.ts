@@ -47,7 +47,8 @@ export class UserFormComponent implements OnInit {
       nome: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       cpf: [null, [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       email: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.email]],
-      tipo: [null]
+      tipo: [null],
+      status: [null]
     });
   }
 
@@ -57,7 +58,7 @@ export class UserFormComponent implements OnInit {
         switchMap(params => this.userService.getById(Guid.parse(String(params.get("id")))))
       ).subscribe(
         (user) => {
-          this.user = user;""
+          this.user = user;
           this.userForm.patchValue(user);
         },
         (error) => toastr.error("Ocorreu um erro no servidor.")
@@ -91,7 +92,7 @@ export class UserFormComponent implements OnInit {
 
     this.userService.update(user)
     .subscribe(
-      user => this.actionsForSuccess(user),
+      user => { this.actionsForSuccess(user); this.router.navigateByUrl('users')},
       error => this.actionsForError(error)
     )
   }

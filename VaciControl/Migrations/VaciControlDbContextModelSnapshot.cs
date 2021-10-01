@@ -39,6 +39,32 @@ namespace VaciControl.Migrations
                     b.ToTable("Manufacturers");
                 });
 
+            modelBuilder.Entity("VaciControl.Models.Patient", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Patient");
+                });
+
             modelBuilder.Entity("VaciControl.Models.User", b =>
                 {
                     b.Property<Guid>("Id")

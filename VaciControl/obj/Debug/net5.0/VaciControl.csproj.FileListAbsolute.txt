@@ -7,9 +7,13 @@ C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\VaciControl.runtimeconfi
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\VaciControl.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\ref\VaciControl.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\VaciControl.pdb
+C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\AutoMapper.dll
+C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Humanizer.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
@@ -57,7 +61,3 @@ C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.dll
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\ref\VaciControl.dll
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.pdb
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.genruntimeconfig.cache
-C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Humanizer.dll
-C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
-C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\AutoMapper.dll
-C:\VaciControl\VaciControl\VaciControl\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
