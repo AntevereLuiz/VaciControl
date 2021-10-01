@@ -15,10 +15,27 @@ export class ManufacturerListComponent implements OnInit {
   constructor(private manufacturerService: ManufacturerService) { }
   
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll(){
     this.manufacturerService.getAll().subscribe(
-      manufacturers => this.manufacturers = manufacturers,
-      error => alert(`Erro: ${error}`)
+      manufacturer => this.manufacturers = manufacturer,
+      error => alert(`Erro ao listar os fabricantes: ${error}`)
     )
   }
 
+  delete(manufacturer : Manufacturer){
+    const mustDelete = confirm('Realmente deseja excluir esse fabricante?');
+
+    if(mustDelete){
+      this.manufacturerService.delete(manufacturer).subscribe(
+        () => {
+          alert('O fabricante foi excluído!');
+          this.getAll();
+        },
+        () => toastr.error('Erro ao tentar excluir!'),
+      )
+    }
+  }
 }

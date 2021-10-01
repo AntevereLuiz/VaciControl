@@ -6,7 +6,7 @@
     </div>
     <div class="col-md text-end">
         <a routerLink="new" class="btn btn-success">
-            + Novo
+            + Novo Fabricante
         </a>
     </div>
 </div>
@@ -21,19 +21,19 @@
         </tr>
     </thead>         
     <tbody>
-        <tr *ngFor="let manufacturers of manufacturers">
+        <tr *ngFor="let manufacturer of manufacturers">
             <td>
-                <small>{{ manufacturers.nome }}</small>
+                <small>{{ manufacturer.nome }}</small>
             </td>
             <td>
-                <small>{{ manufacturers.cnpj }}</small>
+                <small>{{ manufacturer.cnpj }}</small>
             </td>
             <td>
-                <small>{{ manufacturers.email }}</small>
+                <small>{{ manufacturer.email }}</small>
             </td>            
             <td>
-                <a [routerLink]="['edit', manufacturers.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
-                <a class="btn btn-outline-danger btn-sm">Excluir</a>
+                <a [routerLink]="['edit', manufacturer.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a (click)="delete(manufacturer)" class="btn btn-outline-danger btn-sm">Excluir</a>                                
             </td>
         </tr>
     </tbody>   

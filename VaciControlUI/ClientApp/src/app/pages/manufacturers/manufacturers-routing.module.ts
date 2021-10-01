@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)], /*Gerando as rotas*/
   exports: [RouterModule] /*Exportando as rotas*/
 })
-export class ManufacturersRoutingModule { }
+export class ManufacturerRoutingModule { }
