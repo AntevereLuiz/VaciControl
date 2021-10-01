@@ -2,9 +2,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ManufacturersRoutingModule } from './manufacturers-routing.module';
+import { ManufacturerRoutingModule } from './manufacturers-routing.module';
 import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IMaskModule } from 'angular-imask';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form
   ],
   imports: [
     CommonModule,
-    ManufacturersRoutingModule
+    ManufacturerRoutingModule,
+    ReactiveFormsModule,
+    IMaskModule
   ]
 })
 export class ManufacturersModule { }

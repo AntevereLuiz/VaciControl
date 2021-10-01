@@ -1,1 +1,71 @@
-<p>manufacturer-form works!</p>
+<div class="row mb-4 mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Formulário de Fabricantes
+        </h1>
+    </div>
+    <div class="col-md">
+        <a routerLink="/manufacturers" class="btn btn-secondary float-end">
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form [formGroup]="manufacturerForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o fabricante
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="nome">
+                        Nome
+                    </label>
+                    <input type="text" id="nome" class="form-control" formControlName="nome">
+
+                    <div class="text-danger" *ngIf="manufacturerForm.get('nome')?.invalid && manufacturerForm.get('nome')?.touched">
+                        <div *ngIf="manufacturerForm.get('nome')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="manufacturerForm.get('nome')?.errors?.minlength">deve ter no mínimo 2 caracteres</div>
+                        <div *ngIf="manufacturerForm.get('nome')?.errors?.maxlength">deve ter no máximo 50 caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cnpj">
+                        CNPJ
+                    </label>
+                    <input type="text" id="cnpj" class="form-control" formControlName="cnpj" [imask]="{mask: '00.000.000/0000-00'}">
+
+                    <div class="text-danger" *ngIf="manufacturerForm.get('cnpj')?.invalid && manufacturerForm.get('cnpj')?.touched">
+                        <div *ngIf="manufacturerForm.get('cnpj')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="manufacturerForm.get('cnpj')?.errors?.minlength || manufacturerForm.get('cnpj')?.errors?.maxlength">deve ter 14 caracteres</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="email">
+                        E-mail
+                    </label>
+                    <input type="text" id="email" class="form-control" formControlName="email">
+
+                    <div class="text-danger" *ngIf="manufacturerForm.get('email')?.invalid && manufacturerForm.get('email')?.touched">
+                        <div *ngIf="manufacturerForm.get('email')?.errors?.required">dado obrigatório</div>                        
+                        <div *ngIf="manufacturerForm.get('email')?.errors?.maxlength">deve ter no máximo 50 caracteres</div>
+                        <div *ngIf="manufacturerForm.get('email')?.errors?.email">o formato deve ser: email@exemplo.com</div>
+                    </div>
+                </div>               
+            </div>                       
+        </div>
+    </div>
+
+    <button [disabled]="manufacturerForm.invalid" type="submit" class="btn btn-primary float-end mt-3">
+        Salvar
+    </button>
+</form>

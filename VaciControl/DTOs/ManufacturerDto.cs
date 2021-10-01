@@ -4,7 +4,7 @@ namespace VaciControl.DTOs
 {
     public class ManufacturerDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public string Nome { get; set; }
 
