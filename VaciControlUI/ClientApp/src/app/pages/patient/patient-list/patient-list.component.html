@@ -1,0 +1,48 @@
+<div class="row mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Pacientes
+        </h1>
+    </div>
+    <div class="col-md text-end">
+        <a routerLink="new" class="btn btn-success">
+            + Novo Paciente
+        </a>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-primary text-light">
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>E-mail</th>
+            <th>Data de Nascimento</th>
+            <th>Status</th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let patient of patients">
+            <td>
+                <small>{{ patient.nome }}</small>
+            </td>
+            <td>
+                <small>{{ patient.cpf }}</small>
+            </td>
+            <td>
+                <small>{{ patient.email }}</small>
+            </td>
+            <td>
+                <small>{{ patient.dataNascimento! | formatadata}}</small>
+            </td>
+            <td>
+                <small>{{ patient.status! | ativoinativo }}</small>
+            </td>
+            <td class="text-center">
+                <a [routerLink]="['edit', patient.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a class="btn btn-outline-danger btn-sm">Inativar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

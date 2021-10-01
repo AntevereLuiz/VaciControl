@@ -17,10 +17,10 @@ namespace VaciControl.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public ActionResult<List<UserDto>> GetAll()
+        [HttpPost("filter")]
+        public ActionResult<List<UserDto>> GetAll([FromBody] UserFilter filter)
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAllWithConditions(filter);
 
             if (users == null)
             {

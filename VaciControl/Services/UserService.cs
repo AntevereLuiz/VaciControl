@@ -42,12 +42,15 @@ namespace VaciControl.Services
             return allUsersDto;
         }
 
-        public List<UserDto> GetAllWithConditions(Expression<Func<User, bool>> predicate)
+        public List<UserDto> GetAllWithConditions(UserFilter filter)
         {
-            var ativos = _userRepository.GetAllWithConditions(predicate);
-            var ativosDto = _mapper.Map<List<UserDto>>(ativos);
+            var users = _userRepository.GetAllWithConditions(x => x.Nome.Contains(filter.Nome) &&
+                                                                  x.Cpf.Contains(filter.Cpf) &&
+                                                                  x.Email.Contains(filter.Email) &&
+                                                                  (filter.Status == null || x.Status == filter.Status.Value));
+            var usersDto = _mapper.Map<List<UserDto>>(users);
 
-            return ativosDto;
+            return usersDto;
         }
 
         public UserDto GetById(Guid id)

@@ -6,6 +6,7 @@ import { map, catchError, mergeMap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 import { Guid } from 'guid-typescript';
+import { UserFilter } from '../filter/UserFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class UserService {
   constructor(private http: HttpClient
               ) { }
 
-  getAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiPath).pipe(
+  getAll(filter: UserFilter): Observable<User[]> {
+    return this.http.post<User[]>(`${this.apiPath}/filter`, filter).pipe(
       catchError(this.handleError),
       map(this.jsonToUsers)
     )

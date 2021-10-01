@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserFilter } from '../filter/UserFilter';
 
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
@@ -11,6 +12,14 @@ import { UserService } from '../services/user.service';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
+  filter: UserFilter = { nome: '', 
+                         cpf: '', 
+                         email: '', 
+                         status: undefined };
+
+  selectTypes = [ { nome: "Todos", valor: undefined }, 
+                  { nome: "Ativos", valor: true }, 
+                  { nome: "Inativos", valor: false } ];
 
   constructor(private userService: UserService
               ) { }
@@ -20,9 +29,9 @@ export class UserListComponent implements OnInit {
   }
 
   getAll(){
-    this.userService.getAll().subscribe(
+    this.userService.getAll(this.filter).subscribe(
       users => this.users = users,
-      error => alert(`Erro ao listar os usuários: ${error}`)
+      error => alert('Erro ao listar os usuários.')
     )
   }
 
@@ -38,5 +47,12 @@ export class UserListComponent implements OnInit {
         () => toastr.error('Erro ao tentar excluir!'),
       )
     }
+  }
+
+  limparFiltros() {
+    this.filter = { nome: '', 
+                    cpf: '', 
+                    email: '', 
+                    status: undefined };
   }
 }
