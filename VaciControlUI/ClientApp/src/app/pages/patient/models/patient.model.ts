@@ -5,7 +5,7 @@ export class Patient{
         public id?: Guid,
         public nome?: string,
         public cpf?: string,
-        public dataNascimento?: Date,
+        public dataNascimento?: any,
         public email?: string,
         public status?: boolean
     ){}

@@ -51,10 +51,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-8">
-                    <label for="name">
+                    <label for="email">
                         E-mail
                     </label>
-                    <input type="text" id="name" class="form-control" formControlName="email">
+                    <input type="text" id="email" class="form-control" formControlName="email">
 
                     <div class="text-danger" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
                         <div *ngIf="userForm.get('email')?.errors?.required">dado obrigatório</div>

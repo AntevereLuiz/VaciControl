@@ -11,6 +11,78 @@
     </div>
 </div>
 
+<div class="card mt-2 mb-3">
+    <div class="card-header">
+        Filtros
+    </div>
+
+    <div class="card-body ps-3">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="nome">
+                    Nome
+                </label>
+                <input type="text" id="nome" class="form-control" [(ngModel)]='filter.nome'>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="cpf">
+                    Cpf
+                </label>
+                <input type="text" id="cpf" class="form-control" [(ngModel)]='filter.cpf' [imask]="{mask: '000.000.000-00'}">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="dataNascimento">
+                    Data de Nascimento
+                </label>
+
+                <p-calendar [(ngModel)]="dataNascimento"
+                            id="dataNascimento"
+                            inputStyleClass="form-control"
+                            dataType="string"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [monthNavigator]="true"
+                            [yearNavigator]="true"
+                            yearRange={{yearRange}}
+                            >
+                </p-calendar>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="email">
+                    E-Mail
+                </label>
+                <input type="text" id="email" [(ngModel)]='filter.email' class="form-control">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="status">
+                    Status
+                </label>
+                <select class="form-select" id="status" [(ngModel)]='filter.status'>
+                    <option *ngFor="let s of selectTypes" [ngValue]="s.valor">{{ s.nome }}</option>
+                  </select>
+            </div>
+
+            <div class="row mt-2 d-flex justify-content-end" style="padding-right: 0px;">
+                <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                    <a (click)='getAll()' class="btn btn-warning" style="width: 130px;">
+                        Filtrar
+                    </a>
+                </div>
+    
+                <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                    <a (click)='limparFiltros()' class="btn btn-danger" style="width: 130px;">
+                        Limpar Filtros
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="table table-hover">
     <thead>
         <tr class="bg-primary text-light">
@@ -41,7 +113,7 @@
             </td>
             <td class="text-center">
                 <a [routerLink]="['edit', patient.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
-                <a class="btn btn-outline-danger btn-sm">Inativar</a>
+                <a (click)="delete(patient)" class="btn btn-outline-danger btn-sm">Inativar</a>
             </td>
         </tr>
     </tbody>
