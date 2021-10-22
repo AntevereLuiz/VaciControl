@@ -14,9 +14,9 @@ import { UserFilter } from '../filter/UserFilter';
 export class UserService {
 
   private apiPath: string = "http://localhost:56808/api/user"
+  module: string;
 
-  constructor(private http: HttpClient
-              ) { }
+  constructor(private http: HttpClient) { }
 
   getAll(filter: UserFilter): Observable<User[]> {
     return this.http.post<User[]>(`${this.apiPath}/filter`, filter).pipe(
@@ -68,5 +68,13 @@ export class UserService {
   private handleError(error: any): Observable<any> {
     console.log(error);
     return throwError(error);
+  }
+
+  authenticate(user: User) : Observable<User> {
+    //return this.http.post(this.module + 'authenticate', data);
+    return this.http.post(`${this.apiPath}/authenticate`, user).pipe(
+      catchError(this.handleError),
+      map(this.jsonToUser)
+    );
   }
 }

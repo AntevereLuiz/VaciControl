@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using VaciControl.DTOs;
-using VaciControl.Models;
 
 namespace VaciControl.Services
 {
@@ -13,5 +11,6 @@ namespace VaciControl.Services
         void Insert(ManufacturerDto manufacturer);
         void Update(ManufacturerDto manufacturer);
         void Delete(ManufacturerDto manufacturer);
+        List<ManufacturerDto> GetAllWithConditions(ManufacturerFilter filter);
     }
 }

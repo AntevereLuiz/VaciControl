@@ -54,6 +54,15 @@ namespace VaciControl.Services
             return allManufacturerDto;
         }
 
+        public List<ManufacturerDto> GetAllWithConditions(ManufacturerFilter filter)
+        {
+            var manufacturer = _manufacturerRepository.GetAllWithConditions(x => x.Nome.Contains(filter.Nome) &&
+                                                                                 x.Cnpj.Contains(filter.Cnpj));
+            var manufacturerDto = _mapper.Map<List<ManufacturerDto>>(manufacturer);
+
+            return manufacturerDto;
+        }
+
         public ManufacturerDto GetById(Guid id)
         {
             var manufacturer = _manufacturerRepository.GetById(x => x.Id == id);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using VaciControl.DTOs;
 using VaciControl.Models;
 using VaciControl.Persistense;
 
@@ -18,5 +19,10 @@ namespace VaciControl.Repositories
         {
             return GetAll().Where(predicate).ToList();
         }
+        
+        public User GetByCPF(Expression<Func<User, bool>> predicate)
+        {
+            return GetById(predicate);
+        }       
     }
 }

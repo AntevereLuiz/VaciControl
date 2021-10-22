@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ManufacturerFilter } from '../filter/ManufacturerFilter';
 
 import { Manufacturer } from '../models/manufacturer.model';
 import { ManufacturerService } from '../services/manufacturer.service';
+
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -12,6 +14,11 @@ export class ManufacturerListComponent implements OnInit {
 
   manufacturers: Manufacturer[] = [];
 
+  filter: ManufacturerFilter = {
+    nome: '', 
+    cnpj: ''
+  };
+
   constructor(private manufacturerService: ManufacturerService) { }
   
   ngOnInit(): void {
@@ -19,9 +26,9 @@ export class ManufacturerListComponent implements OnInit {
   }
 
   getAll(){
-    this.manufacturerService.getAll().subscribe(
+    this.manufacturerService.getAll(this.filter).subscribe(
       manufacturer => this.manufacturers = manufacturer,
-      error => alert(`Erro ao listar os fabricantes: ${error}`)
+      error => alert('Erro ao listar os fabricantes.')      //exemplo de como identificar um erro: error => alert(`Erro ao listar os fabricantes: ${error}`)
     )
   }
 
@@ -37,5 +44,9 @@ export class ManufacturerListComponent implements OnInit {
         () => toastr.error('Erro ao tentar excluir!'),
       )
     }
+  }
+
+  limparFiltros() {
+    this.filter = { nome: '', cnpj: '' };
   }
 }

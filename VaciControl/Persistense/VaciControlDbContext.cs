@@ -8,10 +8,10 @@ namespace VaciControl.Persistense
         public VaciControlDbContext(DbContextOptions<VaciControlDbContext> options) : base(options)
         {
 
-        }
+        }        
 
         public DbSet<User> Users { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
-        public DbSet<Patient> Patient { get; set; }
+        public DbSet<Patient> Patient { get; set; }              
     }
 }

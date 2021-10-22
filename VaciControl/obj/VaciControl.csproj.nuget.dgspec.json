@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\VaciControl\\VaciControl\\VaciControl\\VaciControl.csproj",
         "projectName": "VaciControl",
         "projectPath": "C:\\VaciControl\\VaciControl\\VaciControl\\VaciControl.csproj",
-        "packagesPath": "C:\\Users\\lcant\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Windows 10 H SL X-64\\.nuget\\packages\\",
         "outputPath": "C:\\VaciControl\\VaciControl\\VaciControl\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lcant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Windows 10 H SL X-64\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,6 +47,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[8.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.11, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

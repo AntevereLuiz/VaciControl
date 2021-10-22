@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ManufacturerRoutingModule } from './manufacturers-routing.module';
 import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 
 @NgModule({
@@ -17,7 +17,8 @@ import { IMaskModule } from 'angular-imask';
     CommonModule,
     ManufacturerRoutingModule,
     ReactiveFormsModule,
-    IMaskModule
+    IMaskModule,
+    FormsModule
   ]
 })
 export class ManufacturersModule { }

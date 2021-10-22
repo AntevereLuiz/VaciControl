@@ -7,6 +7,8 @@ using VaciControl.DTOs;
 using VaciControl.Models;
 using VaciControl.Repositories;
 using VaciControl.UoW;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace VaciControl.Services
 {
@@ -52,6 +54,14 @@ namespace VaciControl.Services
             return userDto;
         }
 
+        public UserDto GetByCPF(string cpf)
+        {
+            var user = _userRepository.GetByCPF(x => x.Cpf == cpf);
+            var userDto = _mapper.Map<UserDto>(user);
+
+            return userDto;
+        }
+
         public void Insert(UserDto userDto)
         {
             userDto.Status = true;
@@ -76,6 +86,38 @@ namespace VaciControl.Services
 
             _userRepository.Update(user);
             _unitOfWork.Commit();
+        }
+
+        public UserAuthenticateResponseViewModel Authenticate(UserAuthenticateRequestViewModel user)
+        {
+            if (string.IsNullOrEmpty(user.CPF) || string.IsNullOrEmpty(user.Password))
+                throw new Exception("CPF/Password are required.");            
+
+            //Se passar a criptografia antes de comparar não encontra o usuário
+            //user.Password = EncryptPassword(user.Password);
+
+            /* o CPF no banco está salvo com a mask, por isso ao comparar lembrar de passar ela */
+            User _user = _userRepository.GetByCPF(x => x.Status && x.Cpf == user.CPF && x.Password.ToLower() == user.Password.ToLower());           
+
+            if (_user == null)
+                throw new Exception("User not found");
+
+            return new UserAuthenticateResponseViewModel(_mapper.Map<User>(_user), TokenService.GenerateToken(_user)); //Preciso passar para o método o usuário e o Token
+        }
+
+        private string EncryptPassword(string password)
+        {
+            HashAlgorithm sha = new SHA1CryptoServiceProvider();
+
+            byte[] encryptedPassword = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var caracter in encryptedPassword)
+            {
+                stringBuilder.Append(caracter.ToString("X2"));
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

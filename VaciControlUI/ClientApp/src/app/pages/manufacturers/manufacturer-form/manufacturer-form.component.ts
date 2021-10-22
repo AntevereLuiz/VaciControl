@@ -43,10 +43,10 @@ export class ManufacturerFormComponent implements OnInit {
 
   private buildManufacturerForm() {
     this.manufacturerForm = this.formBuilder.group({
-    id:    [null],
-    nome:  [null, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    cnpj:  [null, [Validators.required, Validators.minLength(18), Validators.maxLength(18)]],
-    email: [null, [Validators.required, Validators.maxLength(50), Validators.email]]    
+      id:    [null],
+      nome:  [null, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      cnpj:  [null, [Validators.required, Validators.minLength(18), Validators.maxLength(18)]],
+      email: [null, [Validators.required, Validators.maxLength(50), Validators.email]]    
     });
   }
 
@@ -90,7 +90,7 @@ export class ManufacturerFormComponent implements OnInit {
 
     this.manufacturerService.update(manufacturer)
     .subscribe(
-      manufacturer => this.actionsForSuccess(manufacturer),
+      manufacturer => { this.actionsForSuccess(manufacturer); this.router.navigateByUrl('manufacturers') },
       error => this.actionsForError(error)
     )
   }

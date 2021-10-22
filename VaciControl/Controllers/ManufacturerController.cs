@@ -20,17 +20,17 @@ namespace VaciControl.Controllers
         }
 
         /***************** Métodos HTTP *****************/
-        [HttpGet]
-        public ActionResult<List<ManufacturerDto>> GetAll()
+        [HttpPost("filter")]
+        public ActionResult<List<ManufacturerDto>> GetAll([FromBody] ManufacturerFilter filter)
         {
-            var manufacturer = _manufacturerService.GetAll();
+            var manufacturers = _manufacturerService.GetAllWithConditions(filter);
 
-            if (manufacturer == null)
+            if (manufacturers == null)
             {
                 return BadRequest();
             }
 
-            return Ok(manufacturer);
+            return Ok(manufacturers);
         }
 
         [HttpGet("{id}")]

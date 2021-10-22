@@ -1,0 +1,27 @@
+<div class="container" >
+    <div class="content row mb-6 mt-8" *ngIf="!isAuthenticated">                                                                       
+            <div id="login">                
+                <form> 
+                    <h1>Login</h1> 
+                    <div>
+                        <label for="exampleInputCpf">CPF</label>
+                        <input type="cpf" class="form-control" id="exampleInputCpf" placeholder="000.000.000-00" [(ngModel)]="userLogin.cpf" name="cpf" [imask]="{mask: '000.000.000-00'}">
+                    </div>
+                                
+                    <div>
+                        <label for="exampleInputPassword">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword" placeholder="Senha" [(ngModel)]="userLogin.password" name="password" >
+                    </div>
+                            
+                    <div style="text-align: right; margin-right: 14px; margin-top: 5px;">                                                
+                        <a href="#paracadastro">Esqueceu a senha?</a>                           
+                    </div>
+                    
+                    <div class= "botao">
+                        <button type="submit" class="btn btn-primary" (click)="authenticate()">Login</button>
+                    </div>                                                    
+                </form>                     
+            </div>                                                  
+    </div> 
+</div>
+

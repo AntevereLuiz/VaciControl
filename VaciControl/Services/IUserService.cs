@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using VaciControl.DTOs;
+using VaciControl.Models;
 
 namespace VaciControl.Services
 {
@@ -12,5 +13,6 @@ namespace VaciControl.Services
         void Update(UserDto user);
         void Delete(UserDto user);
         List<UserDto> GetAllWithConditions(UserFilter filter);
+        UserAuthenticateResponseViewModel Authenticate(UserAuthenticateRequestViewModel user);
     }
 }
