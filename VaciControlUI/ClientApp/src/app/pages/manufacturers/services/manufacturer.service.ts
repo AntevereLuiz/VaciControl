@@ -6,6 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { Manufacturer } from '../models/manufacturer.model';
 import { Guid } from 'guid-typescript';
+import {ManufacturerFilter} from '../filter/ManufacturerFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class ManufacturerService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Manufacturer[]> {
-    return this.http.get<Manufacturer[]>(this.apiPath).pipe(
+  getAll(filter: ManufacturerFilter): Observable<Manufacturer[]> {
+    return this.http.post<Manufacturer[]>(`${this.apiPath}/filter`, filter).pipe(
       catchError(this.handleError),
       map(this.jsonToManufacturers)
     )

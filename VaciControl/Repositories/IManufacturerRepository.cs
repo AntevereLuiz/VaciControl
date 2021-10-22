@@ -7,6 +7,6 @@ namespace VaciControl.Repositories
 {
     public interface IManufacturerRepository : IRepository<Manufacturer>
     {
-        //List<Manufacturer> GetAllWithConditions(Expression<Func<Manufacturer, bool>> predicate);
+        List<Manufacturer> GetAllWithConditions(Expression<Func<Manufacturer, bool>> predicate);
     }
 }

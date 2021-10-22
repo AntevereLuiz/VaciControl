@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using VaciControl.Models;
 using VaciControl.Persistense;
+
 namespace VaciControl.Repositories
 {
     public class ManufacturerRepository : Repository<Manufacturer>, IManufacturerRepository
@@ -12,12 +13,11 @@ namespace VaciControl.Repositories
         {
 
         }
-
-        /*
+        
         public List<Manufacturer> GetAllWithConditions(Expression<Func<Manufacturer, bool>> predicate)
         {
             return GetAll().Where(predicate).ToList();
         }
-        */
+        
     }
 }

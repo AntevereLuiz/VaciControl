@@ -103,7 +103,7 @@ export class UserFormComponent implements OnInit {
 
   private actionsForError(error: any){
     this.submitiingForm = false;
-    toastr.error("Ecorreu um erro ao processar a sua solicitação.");
+    toastr.error("Ocorreu um erro ao processar a sua solicitação.");
 
     if(error.status === 442){
       this.serverErrorMessages = JSON.parse(error._body).errors;

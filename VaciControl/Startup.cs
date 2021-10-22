@@ -11,6 +11,12 @@ using VaciControl.Persistense;
 using VaciControl.Repositories;
 using VaciControl.Services;
 using VaciControl.UoW;
+//Adicionados por causa da Autenticação
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using VaciControl.Models;
+using System.Text;
+//
 
 namespace VaciControl
 {
@@ -56,6 +62,24 @@ namespace VaciControl
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VaciControl", Version = "v1" });
             });
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            services.AddAuthentication(x => //Criando um objeto de Autenticação falando qual é o esquema padrão de autenticação e o challenge
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false; //HTTPS nesse caso não é obrigatório 
+                x.SaveToken = true; //Salvar o token
+                x.TokenValidationParameters = new TokenValidationParameters //PArâmetros da validação dos tokens
+                {
+                    ValidateIssuerSigningKey = true, //Reconhecer assinatura da chave 
+                    IssuerSigningKey = new SymmetricSecurityKey(key), //Envia a chave 
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +94,11 @@ namespace VaciControl
 
             app.UseRouting();
 
+            //Gerencia as chaves privadas e públicas
+            app.UseAuthentication();
+
             app.UseAuthorization();
+            //
 
             app.UseCors("CorsPolicy");
 
