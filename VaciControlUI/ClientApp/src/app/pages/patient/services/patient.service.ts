@@ -25,6 +25,38 @@ export class PatientService {
     )
   }
 
+  getById(id: Guid) : Observable<Patient> {
+    return this.http.get(`${this.apiPath}/${id}`).pipe(
+      catchError(this.handleError),
+      map(this.jsonToUser)
+    );
+  }
+
+  create(patient: Patient) : Observable<Patient> {
+    return this.http.post(this.apiPath, patient).pipe(
+      catchError(this.handleError),
+      map(this.jsonToUser)
+    );
+  }
+
+  update(patient: Patient) : Observable<Patient> {
+    return this.http.put(`${this.apiPath}/${patient.id}`, patient).pipe(
+      catchError(this.handleError),
+      map(() => patient)
+    );
+  }
+
+  delete(patient: Patient) : Observable<any> {
+    return this.http.put(`${this.apiPath}/remove/${patient.id}`, patient).pipe(
+      catchError(this.handleError),
+      map(() => null)
+    );
+  }
+
+  private jsonToUser(json: any): Patient {
+    return json as Patient;
+  }
+
   private jsonToUsers(json: any[]): Patient[] {
     const user: Patient[] = [];
     json.forEach(element => {

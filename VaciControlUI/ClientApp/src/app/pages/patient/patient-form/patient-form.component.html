@@ -1,0 +1,101 @@
+<div class="row mb-4 mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Formulário de Paciente
+        </h1>
+    </div>
+    <div class="col-md">
+        <a routerLink="/patients" class="btn btn-secondary float-end">
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form [formGroup]="patientForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o paciente
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="nome">
+                        Nome
+                    </label>
+                    <input type="text" id="nome" class="form-control" formControlName="nome">
+
+                    <div class="text-danger" *ngIf="patientForm.get('nome')?.invalid && patientForm.get('nome')?.touched">
+                        <div *ngIf="patientForm.get('nome')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="patientForm.get('nome')?.errors?.minlength">deve ter no mínimo 2 caracteres</div>
+                        <div *ngIf="patientForm.get('nome')?.errors?.maxlength">deve ter no máximo 100 caracteres</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cpf">
+                        Cpf
+                    </label>
+                    <input type="text" id="cpf" class="form-control" formControlName="cpf" [imask]="{mask: '000.000.000-00'}">
+
+                    <div class="text-danger" *ngIf="patientForm.get('cpf')?.invalid && patientForm.get('cpf')?.touched">
+                        <div *ngIf="patientForm.get('cpf')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="patientForm.get('cpf')?.errors?.minlength || patientForm.get('cpf')?.errors?.maxlength">deve ter 14 caracteres</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="email">
+                        E-mail
+                    </label>
+                    <input type="text" id="name" class="form-control" formControlName="email">
+
+                    <div class="text-danger" *ngIf="patientForm.get('email')?.invalid && patientForm.get('email')?.touched">
+                        <div *ngIf="patientForm.get('email')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="patientForm.get('email')?.errors?.minlength">deve ter no mínimo 3 caracteres</div>
+                        <div *ngIf="patientForm.get('email')?.errors?.maxlength">deve ter no máximo 100 caracteres</div>
+                        <div *ngIf="patientForm.get('email')?.errors?.email">o formato deve ser: email@exemplo.com</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="dataNascimento">
+                        Data de Nascimento
+                    </label>
+    
+                    <p-calendar formControlName="dataNascimento"
+                                id="dataNascimento"
+                                dateFormat="dd/mm/yy"
+                                dataType="string"
+                                [showIcon]="true"
+                                [monthNavigator]="true"
+                                [yearNavigator]="true"
+                                yearRange={{yearRange}}
+                                >
+                    </p-calendar>
+
+                    <div class="text-danger" *ngIf="patientForm.get('dataNascimento')?.invalid && patientForm.get('dataNascimento')?.touched">
+                        <div *ngIf="patientForm.get('dataNascimento')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4" *ngif="false">
+                    <label for="senha">
+                        Senha
+                    </label>
+                    <input type="password" id="senha" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="patientForm.invalid" type="submit" class="btn btn-primary float-end mt-3">
+        Salvar
+    </button>
+</form>

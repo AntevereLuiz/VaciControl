@@ -25,15 +25,6 @@ namespace VaciControl.Services
             _mapper = mapper;
         }
 
-        public void Delete(UserDto userDto)
-        {
-            userDto.Status = false;
-            var user = _mapper.Map<User>(userDto);
-
-            _userRepository.Update(user);
-            _unitOfWork.Commit();
-        }
-
         public List<UserDto> GetAll()
         {
             var allUsers = _userRepository.GetAll().ToList();
@@ -72,6 +63,15 @@ namespace VaciControl.Services
 
         public void Update(UserDto userDto)
         {
+            var user = _mapper.Map<User>(userDto);
+
+            _userRepository.Update(user);
+            _unitOfWork.Commit();
+        }
+
+        public void Delete(UserDto userDto)
+        {
+            userDto.Status = false;
             var user = _mapper.Map<User>(userDto);
 
             _userRepository.Update(user);

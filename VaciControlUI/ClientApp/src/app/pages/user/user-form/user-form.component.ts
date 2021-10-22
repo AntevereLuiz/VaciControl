@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class UserFormComponent implements OnInit {
   }
 
   private setCurrentAction() {
-    if(this.route.snapshot.url[0].path == "new") {  //pode ser que esteja errado pro edit
+    if(this.route.snapshot.url[0].path == "new") {
       this.currentAction = "new";
     }
     else
@@ -113,5 +113,3 @@ export class UserFormComponent implements OnInit {
     }
   }
 }
-
-

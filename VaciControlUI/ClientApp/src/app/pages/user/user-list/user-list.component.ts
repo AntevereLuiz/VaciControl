@@ -3,6 +3,7 @@ import { UserFilter } from '../filter/UserFilter';
 
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
+import * as toastr from "toastr";
 
 @Component({
   selector: 'app-user-list',
@@ -31,7 +32,7 @@ export class UserListComponent implements OnInit {
   getAll(){
     this.userService.getAll(this.filter).subscribe(
       users => this.users = users,
-      error => alert('Erro ao listar os usuários.')
+      error => toastr.error('Erro ao listar os usuários.')
     )
   }
 
@@ -41,7 +42,7 @@ export class UserListComponent implements OnInit {
     if(mustDelete){
       this.userService.delete(user).subscribe(
         () => {
-          alert('O usuário foi inativado!');
+          toastr.success('O usuário foi inativado!');
           this.getAll();
         },
         () => toastr.error('Erro ao tentar excluir!'),
