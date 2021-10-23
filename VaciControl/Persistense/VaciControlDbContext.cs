@@ -12,6 +12,7 @@ namespace VaciControl.Persistense
 
         public DbSet<User> Users { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
-        public DbSet<Patient> Patient { get; set; }              
+        public DbSet<Patient> Patient { get; set; }
+        public DbSet<Disease> Diseases { get; set; }
     }
 }
