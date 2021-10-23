@@ -6251,7 +6251,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Windows 10 H SL X-64\\.nuget\\packages\\": {}
+    "C:\\Users\\lcant\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6259,11 +6259,11 @@
       "projectUniqueName": "C:\\VaciControl\\VaciControl\\VaciControl\\VaciControl.csproj",
       "projectName": "VaciControl",
       "projectPath": "C:\\VaciControl\\VaciControl\\VaciControl\\VaciControl.csproj",
-      "packagesPath": "C:\\Users\\Windows 10 H SL X-64\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\lcant\\.nuget\\packages\\",
       "outputPath": "C:\\VaciControl\\VaciControl\\VaciControl\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Windows 10 H SL X-64\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lcant\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

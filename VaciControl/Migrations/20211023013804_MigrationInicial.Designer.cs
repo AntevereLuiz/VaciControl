@@ -10,8 +10,8 @@ using VaciControl.Persistense;
 namespace VaciControl.Migrations
 {
     [DbContext(typeof(VaciControlDbContext))]
-    [Migration("20210928000115_Tabela_Patients")]
-    partial class Tabela_Patients
+    [Migration("20211023013804_MigrationInicial")]
+    partial class MigrationInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,20 @@ namespace VaciControl.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("VaciControl.Models.Disease", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Diseases");
+                });
 
             modelBuilder.Entity("VaciControl.Models.Manufacturer", b =>
                 {
@@ -64,7 +78,7 @@ namespace VaciControl.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patient");
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("VaciControl.Models.User", b =>
@@ -80,6 +94,9 @@ namespace VaciControl.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
