@@ -6,7 +6,6 @@ namespace VaciControl.Services
 {
     public interface IPatientService
     {
-        List<PatientDto> GetAll();
         PatientDto GetById(Guid id);
         void Insert(PatientDto user);
         void Update(PatientDto user);

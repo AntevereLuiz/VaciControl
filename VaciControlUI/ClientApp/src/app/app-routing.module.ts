@@ -21,14 +21,12 @@ const routes: Routes = [
     path: 'patients', 
     loadChildren: () => import('./pages/patient/patient.module').then(m => m.PatientModule)
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, //Redireciona para a tela de login qnd se digita http://localhost:4200/
-  { path: '**', redirectTo: 'login', pathMatch: 'full' }, //Redireciona para a tela de login qnd se digita, por exemplo, http://localhost:4200/asdfdsf
-
   {
     path: 'diseases',
     loadChildren: () => import('./pages/disease/disease.module').then(m => m.DiseaseModule)
   },
-
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, //Redireciona para a tela de login qnd se digita http://localhost:4200/
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }, //Redireciona para a tela de login qnd se digita, por exemplo, http://localhost:4200/asdfdsf
 ];
 
 @NgModule({

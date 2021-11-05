@@ -52,11 +52,11 @@ export class LoginFormComponent implements OnInit {
         //this.get();
         this.getUserData();
       } else {
-        alert('Usuário inválido.');
+        toastr.error('Usuário inválido.');
       }      
     }, error => {
       console.log(error);
-        alert('Erro ao tentar realizar o login no sistema.');
+      toastr.error('Erro ao tentar realizar o login no sistema.');
     })
   }
 

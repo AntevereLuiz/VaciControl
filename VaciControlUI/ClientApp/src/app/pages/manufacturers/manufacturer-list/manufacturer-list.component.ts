@@ -3,6 +3,7 @@ import { ManufacturerFilter } from '../filter/ManufacturerFilter';
 
 import { Manufacturer } from '../models/manufacturer.model';
 import { ManufacturerService } from '../services/manufacturer.service';
+import * as toastr from "toastr";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class ManufacturerListComponent implements OnInit {
   getAll(){
     this.manufacturerService.getAll(this.filter).subscribe(
       manufacturer => this.manufacturers = manufacturer,
-      error => alert('Erro ao listar os fabricantes.')      //exemplo de como identificar um erro: error => alert(`Erro ao listar os fabricantes: ${error}`)
+      error =>  toastr.error('Erro ao listar os fabricantes.')      //exemplo de como identificar um erro: error => alert(`Erro ao listar os fabricantes: ${error}`)
     )
   }
 
@@ -38,7 +39,7 @@ export class ManufacturerListComponent implements OnInit {
     if(mustDelete){
       this.manufacturerService.delete(manufacturer).subscribe(
         () => {
-          alert('O fabricante foi excluído!');
+          toastr.success('O fabricante foi excluído!');
           this.getAll();
         },
         () => toastr.error('Erro ao tentar excluir!'),

@@ -48,6 +48,8 @@ namespace VaciControl
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IDiseaseService, DiseaseService>();
+            services.AddScoped<IDiseaseRepository, DiseaseRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var mapperConfig = new MapperConfiguration(x =>
