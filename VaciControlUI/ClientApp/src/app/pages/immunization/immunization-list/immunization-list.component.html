@@ -1,0 +1,114 @@
+<div class="row mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Imunização
+        </h1>
+    </div>
+    <div class="col-md text-end">
+        <a routerLink="new" class="btn btn-success">
+            + Nova Imunização
+        </a>
+    </div>
+</div>
+
+<div class="card mt-2 mb-3">
+    <div class="card-header">
+        Filtros
+    </div>
+
+    <div class="card-body ps-3">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="nome">
+                    Nome
+                </label>
+                <!-- <input type="text" id="nome" class="form-control" [(ngModel)]='filter.nome'> -->
+                <input type="text" id="nome" class="form-control">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="cpf">
+                    CPF
+                </label>
+                <!-- <input type="text" id="cpf" class="form-control" [(ngModel)]='filter.cpf' [imask]="{mask: '000.000.000-00'}"> -->
+                <input type="text" id="cpf" class="form-control" [imask]="{mask: '000.000.000-00'}">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="campanha">
+                    Campanha
+                </label>
+                <!-- <input type="text" id="campanha" class="form-control" [(ngModel)]='filter.campanha'> -->
+                <input type="text" id="campanha" class="form-control">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="status">
+                    Status
+                </label>
+                <select class="form-select" id="status" > <!--  [(ngModel)]='filter.status'-->
+                    <option *ngFor="let s of selectTypes" [ngValue]="s.valor">{{ s.nome }}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <!-- <a (click)='getAll()' class="btn btn-warning" style="width: 130px;"> -->
+                <a class="btn btn-warning" style="width: 130px;">
+                    Filtrar
+                </a>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <!-- <a (click)='limparFiltros()' class="btn btn-danger" style="width: 130px;"></a> -->
+                <a class="btn btn-danger" style="width: 130px;">
+                    Limpar Filtros
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-primary text-light">
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Campanha</th>
+            <th>Vacina</th>
+            <th>Dose</th>
+            <th>Data Prevista</th> 
+            <th>Data Vacina</th>
+            <th>Ações</th>
+        </tr>
+    </thead>         
+    <tbody>
+        <!-- <tr *ngFor="let immunization of immunizations">
+            <td>
+                <small>{{ immunization.nome }}</small>
+            </td>
+            <td>
+                <small>{{ immunization.cpf }}</small>
+            </td>
+            <td>
+                <small>{{ immunization.campanha }}</small>
+            </td>            
+            <td>
+                <small>{{ immunization.vacina }}</small>
+            </td>
+            <td>
+                <small>{{ immunization.dose }}</small>
+            </td>
+            <td>
+                <small>{{ immunization.dataPrevista }}</small>
+            </td>
+            <td>
+                <small>{{ immunization.datatVacina }}</small>
+            </td>
+            <td>
+                <a (click)="vacinar(immunization)" class="btn btn-outline-danger btn-sm">Vacinar</a>
+                <a [routerLink]="['edit', immunization.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a (click)="delete(immunization)" class="btn btn-outline-danger btn-sm">Excluir</a>                                                
+            </td>
+        </tr> -->
+    </tbody>   
+</table>
