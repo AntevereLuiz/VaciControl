@@ -40,7 +40,7 @@ export class PatientListComponent implements OnInit {
 
     this.patientService.getAll(this.filter).subscribe(
       patients => this.patients = patients,
-      error => alert('Erro ao listar os usuários.')
+      error => toastr.error('Erro ao listar os usuários.')
     )
   }
 

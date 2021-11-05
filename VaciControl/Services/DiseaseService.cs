@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using VaciControl.DTOs;
+using VaciControl.Models;
 using VaciControl.Repositories;
 using VaciControl.UoW;
 
@@ -26,9 +27,41 @@ namespace VaciControl.Services
         {
             var diseases = _diseaseRepository.GetAllWithConditions(x => x.Nome.Contains(filter.Nome));
 
-            var diseaseDtoDto = _mapper.Map<List<DiseaseDto>>(diseases);
+            var diseasesDto = _mapper.Map<List<DiseaseDto>>(diseases);
 
-            return diseaseDtoDto;
+            return diseasesDto;
+        }
+
+        public DiseaseDto GetById(Guid id)
+        {
+            var disease = _diseaseRepository.GetById(x => x.Id == id);
+            var diseaseDto = _mapper.Map<DiseaseDto>(disease);
+
+            return diseaseDto;
+        }
+
+        public void Insert(DiseaseDto diseaseDto)
+        {
+            var disease = _mapper.Map<Disease>(diseaseDto);
+
+            _diseaseRepository.Insert(disease);
+            _unitOfWork.Commit();
+        }
+
+        public void Update(DiseaseDto diseaseDto)
+        {
+            var disease = _mapper.Map<Disease>(diseaseDto);
+
+            _diseaseRepository.Update(disease);
+            _unitOfWork.Commit();
+        }
+
+        public void Delete(DiseaseDto diseaseDto)
+        {
+            var disease = _mapper.Map<Disease>(diseaseDto);
+
+            _diseaseRepository.Delete(disease);
+            _unitOfWork.Commit();
         }
     }
 }

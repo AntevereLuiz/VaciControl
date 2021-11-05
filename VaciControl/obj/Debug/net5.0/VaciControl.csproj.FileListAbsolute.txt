@@ -56,7 +56,6 @@ C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\staticwebassets\VaciCont
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\staticwebassets\VaciControl.StaticWebAssets.xml
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\scopedcss\bundle\VaciControl.styles.css
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.RazorTargetAssemblyInfo.cache
-C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.csproj.CopyComplete
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.dll
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\ref\VaciControl.dll
 C:\VaciControl\VaciControl\VaciControl\obj\Debug\net5.0\VaciControl.pdb

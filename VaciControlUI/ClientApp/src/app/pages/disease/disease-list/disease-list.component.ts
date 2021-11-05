@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DiseaseFilter } from '../filter/DiseaseFilter';
 import { Disease } from '../models/disease.model';
 import { DiseaseService } from '../services/disease.service';
+import * as toastr from "toastr";
 
 @Component({
   selector: 'app-disease-list',
@@ -13,8 +14,6 @@ export class DiseaseListComponent implements OnInit {
   diseases: Disease[] = [];
   filter: DiseaseFilter = {nome: ''};
 
-  
-
   constructor(private diseaseService: DiseaseService) { }
 
   ngOnInit(): void {
@@ -24,7 +23,7 @@ export class DiseaseListComponent implements OnInit {
   getAll(){
     this.diseaseService.getAll(this.filter).subscribe(
       diseases => this.diseases = diseases,
-      error => alert('Erro ao listar as doenças.')
+      error => toastr.error('Erro ao listar as doenças.')
     )
   }
 
@@ -34,7 +33,7 @@ export class DiseaseListComponent implements OnInit {
     if(mustDelete){
       this.diseaseService.delete(disease).subscribe(
         () => {
-          alert('A doença foi excluído!');
+          toastr.success('A doença foi excluída!');
           this.getAll();
         },
         () => toastr.error('Erro ao tentar excluir!'),
@@ -43,7 +42,7 @@ export class DiseaseListComponent implements OnInit {
   }
 
   limparFiltros() {
-    this.filter = { nome: ''};
+    this.filter = { nome: '' };
   }
 
 }

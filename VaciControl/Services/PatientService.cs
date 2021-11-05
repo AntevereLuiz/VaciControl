@@ -70,10 +70,5 @@ namespace VaciControl.Services
             _patientRepository.Update(patient);
             _unitOfWork.Commit();
         }
-
-        public List<PatientDto> GetAll()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
