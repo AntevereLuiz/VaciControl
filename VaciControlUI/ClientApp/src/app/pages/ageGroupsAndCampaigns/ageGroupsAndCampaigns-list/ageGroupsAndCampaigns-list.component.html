@@ -1,0 +1,130 @@
+<div class="row mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Campanhas e Faixas Etárias
+        </h1>
+    </div>
+    <div class="col-md text-end">
+        <a routerLink="new" class="btn btn-success">
+            + Nova Campanha e Faixas Etárias
+        </a>
+    </div>
+</div>
+
+<div class="card mt-2 mb-3">
+    <div class="card-header">
+        Filtros
+    </div>
+
+    <!-- QUANDO A TELA FICAR PRONTA REMOVER O COMENTÁRIO
+    <div class="card-body ps-3">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="campaignName">
+                    Nome da campanha
+                </label>
+                <input type="text" id="campaignName" class="form-control" [(ngModel)]='filter.campaignName'>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="disease">
+                    Doença
+                </label>
+                <input type="text" id="disease" class="form-control" [(ngModel)]='filter.disease'>
+            </div>                      
+
+            <div class="form-group col-md-2">
+                <label for="status">
+                    Status
+                </label>
+                <select class="form-select" id="status" [(ngModel)]='filter.status'>
+                    <option *ngFor="let s of selectTypes" [ngValue]="s.valor">{{ s.nome }}</option>
+                  </select>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <a (click)='getAll()' class="btn btn-warning" style="width: 130px;">
+                    Filtrar
+                </a>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <a (click)='limparFiltros()' class="btn btn-danger" style="width: 130px;">
+                    Limpar Filtros
+                </a>
+            </div>
+        </div>
+    </div>
+    -->
+    <div class="card-body ps-3">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="campaignName">
+                    Campanha
+                </label>
+                <input type="text" id="campaignName" class="form-control">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="disease">
+                    Doença
+                </label>
+                <input type="text" id="disease" class="form-control">
+            </div>                      
+
+            <div class="form-group col-md-2">
+                <label for="status">
+                    Status
+                </label>
+                <select class="form-select" id="status">
+                    <option *ngFor="let s of selectTypes" [ngValue]="s.valor">{{ s.nome }}</option>
+                  </select>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <a class="btn btn-warning" style="width: 130px;">
+                    Filtrar
+                </a>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <a class="btn btn-danger" style="width: 130px;">
+                    Limpar Filtros
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-primary text-light">
+            <th>Nome da campanha</th>
+            <th>Doença</th>
+            <th>Status</th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--
+        <tr *ngFor="let ageGroupAndCampaign of ageGroupAndCampaigns">
+            <td>
+                <small>{{ ageGroupAndCampaign.campaignName }}</small>
+            </td>
+            <td>
+                <small>{{ ageGroupAndCampaign.disease }}</small>
+            </td>
+            <td>
+                <small>{{ ageGroupAndCampaign.status }}</small>
+            </td>            
+            <td>
+                <small>{{ ageGroupAndCampaign.status! | ativoinativo }}</small>
+            </td>
+            <td class="text-center">
+                <a [routerLink]="['edit', ageGroupAndCampaign.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a (click)="delete(ageGroupAndCampaign)" class="btn btn-outline-danger btn-sm">Inativar</a>
+            </td>
+        </tr>
+        -->
+    </tbody>
+</table>

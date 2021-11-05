@@ -1,0 +1,96 @@
+<div class="row mb-4 mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Formulário de Imunização
+        </h1>
+    </div>
+    <div class="col-md">
+        <a routerLink="/immunization" class="btn btn-secondary float-end">
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form [formGroup]="immunizationForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre a imunização
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="cpf">
+                        Cpf
+                    </label>
+                    <input type="text" id="cpf" class="form-control" formControlName="cpf" [imask]="{mask: '000.000.000-00'}">
+
+                    <div class="text-danger" *ngIf="immunizationForm.get('cpf')?.invalid && immunizationForm.get('cpf')?.touched">
+                        <div *ngIf="immunizationForm.get('cpf')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="immunizationForm.get('cpf')?.errors?.minlength || immunizationForm.get('cpf')?.errors?.maxlength">deve ter 14 caracteres</div>
+                    </div>
+                </div>
+               
+                <div class="form-group col-md-6">
+                    <label for="nome">
+                        Nome
+                    </label>
+                    <input type="text" id="nome" class="form-control" formControlName="nome">                    
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="campanha">
+                        Campanha
+                    </label>
+                    <!--<select class="form-select" id="campanha" [(ngModel)]=''>-->
+                    <select class="form-select" id="campanha">
+                        <option *ngFor="let campanha of dropdownCampanha">{{campanha}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="vacina">
+                        Vacina
+                    </label>
+                    <!--<select class="form-select" id="vacina" [(ngModel)]=''>-->
+                    <select class="form-select" id="vacina">
+                        <option *ngFor="let vacina of dropdownVacina">{{vacina}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="form-group col-md-6">
+                    <label for="lote">
+                        Lote
+                    </label>
+                    <!--<select class="form-select" id="lote" [(ngModel)]=''>-->
+                    <select class="form-select" id="lote">
+                        <option *ngFor="let lote of dropdownLote">{{lote}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="dose">
+                        Dose
+                    </label>
+                    <!--<select class="form-select" id="dose" [(ngModel)]=''>-->
+                    <select class="form-select" id="dose">
+                        <option *ngFor="let dose of dropdownDose">{{dose}}</option>
+                    </select>
+                </div>               
+            </div>
+        </div>
+    </div> 
+    <button [disabled]="immunizationForm.invalid" type="submit" class="btn btn-primary float-end mt-3">
+        Salvar
+    </button>
+</form>

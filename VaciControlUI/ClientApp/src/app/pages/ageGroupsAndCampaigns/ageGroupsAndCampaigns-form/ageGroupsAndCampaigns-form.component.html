@@ -1,0 +1,146 @@
+<div class="row mb-4 mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Cadastrar campanha e Faixas Etárias
+        </h1>
+    </div>
+    <div class="col-md">
+        <a routerLink="/ageGroupsAndCampaigns" class="btn btn-secondary float-end">
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form [formGroup]="ageGroupsAndCampaignsForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre a Campanha e Faixas Etárias
+        </div>
+
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="campaignName">
+                        Nome da Campanha
+                    </label>
+                    <input type="text" id="campaignName" class="form-control" formControlName="campaignName">
+
+                    <div class="text-danger"
+                        *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.invalid && ageGroupsAndCampaignsForm.get('campaignName')?.touched">
+                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.minlength">deve ter no mínimo 10 caracteres</div>
+                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.maxlength">deve ter no máximo 50 caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label for="diseaseName">
+                        Doença
+                    </label>
+                    <!--<select class="form-select" id="disease" [(ngModel)]=''>-->
+                    <select class="form-select" id="disease">
+                        <option *ngFor="let disease of dropdownDisease">{{disease}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div formArrayName="ageGroup">
+            <div  *ngFor="let ageGroup of ageGroup.controls; let i = index">
+                <div [formGroupName]="i">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <label for="minimumAge">
+                                    Idade Mínima
+                                </label>
+                                <input type="text" class="form-control" formControlName="minAge">
+
+                                <div class="text-danger">
+                                    <div
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.minAge')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?.minAge')?.touched">
+                                    </div>
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.minAge')?.errors?.required">dado
+                                        obrigatório</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="maximumAge">
+                                    Idade Máxima
+                                </label>
+                                <input type="text" class="form-control" formControlName="maxAge">
+
+                                <div class="text-danger">
+                                    <div
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.maxAge')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?.maxAge')?.touched">
+                                    </div>
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.maxAge')?.errors?.required">dado
+                                        obrigatório </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="dateIni">
+                                    Data Inicial
+                                </label>
+
+                                <p-calendar formControlName="dateIni" dateFormat="dd/mm/yy"
+                                    dataType="string" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true"
+                                    yearRange={{yearRange}}>
+                                </p-calendar>
+
+                                <div class="text-danger">
+                                    <div
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.dateIni')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?.dateIni')?.touched">
+                                    </div>
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.dateIni')?.errors?.required">dado
+                                        obrigatório</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="dateFim">
+                                    Data Final
+                                </label>
+
+                                <p-calendar formControlName="dateFim" dateFormat="dd/mm/yy"
+                                    dataType="string" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true"
+                                    yearRange={{yearRange}}>
+                                </p-calendar>
+
+                                <div class="text-danger">
+                                    <div
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?dateFim')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?dateFim')?.touched">
+                                    </div>
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?dateFim')?.errors?.required">dado
+                                        obrigatório</div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-2" style="width: 120px;">
+                                <a (click)='inserir(i)' class="btn btn-success" style="width: 100px; margin-top: 25px;">
+                                    Inserir
+                                </a>
+                            </div>
+
+                            <div class="form-group col-md-2" style="width: 120px;">
+                                <a (click)='excluir(i)' class="btn btn-danger"
+                                    style="width: 100px; margin-top: 25px;">
+                                    Excluir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="ageGroupsAndCampaignsForm.invalid" type="submit" class="btn btn-primary float-end mt-3">
+        Salvar
+    </button>
+</form>
