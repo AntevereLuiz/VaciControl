@@ -25,7 +25,19 @@ const routes: Routes = [
     path: 'diseases',
     loadChildren: () => import('./pages/disease/disease.module').then(m => m.DiseaseModule)
   },
+
+  {
+    path: 'ageGroupsAndCampaigns',
+    loadChildren: () => import('./pages/ageGroupsAndCampaigns/ageGroupsAndCampaigns.module').then(m => m.AgeGroupsAndCampaignsModule)
+  },
+
+  {
+    path: 'immunization',
+    loadChildren: () => import('./pages/immunization/immunization.module').then(m => m.ImmunizationModule)
+  },
+  
   { path: '', redirectTo: 'login', pathMatch: 'full' }, //Redireciona para a tela de login qnd se digita http://localhost:4200/
+  
   { path: '**', redirectTo: 'login', pathMatch: 'full' }, //Redireciona para a tela de login qnd se digita, por exemplo, http://localhost:4200/asdfdsf
 ];
 
