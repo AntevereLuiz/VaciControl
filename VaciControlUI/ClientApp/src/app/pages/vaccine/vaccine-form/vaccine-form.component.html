@@ -1,0 +1,89 @@
+<div class="row mb-4 mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Formulário de Vacina
+        </h1>
+    </div>
+    <div class="col-md">
+        <a routerLink="/vaccines" class="btn btn-secondary float-end">
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form [formGroup]="vaccineForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre a vacina
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="nome">
+                        Nome
+                    </label>
+                    <input type="text" id="nome" class="form-control" formControlName="nome">
+
+                    <div class="text-danger" *ngIf="vaccineForm.get('nome')?.invalid && vaccineForm.get('nome')?.touched">
+                        <div *ngIf="vaccineForm.get('nome')?.errors?.required">dado obrigatório</div>
+                        <div *ngIf="vaccineForm.get('nome')?.errors?.minlength">deve ter no mínimo 2 caracteres</div>
+                        <div *ngIf="vaccineForm.get('nome')?.errors?.maxlength">deve ter no máximo 100 caracteres</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="doenca">
+                        Doença
+                    </label>
+                    <!--ABAIXO PRECISO DO [(ngModel)]='filter.doenca' ?-->
+                    <select class="form-select" id="doenca" formControlName="doenca">
+                        <!--ABAIXO PRECISO DO [ngValue]="dT.valor" ?-->
+                        <option *ngFor="let dT of diseaseTypes">{{ dT.nome }}</option>
+                    </select>
+
+                    <div class="text-danger" *ngIf="vaccineForm.get('doenca')?.invalid && vaccineForm.get('doenca')?.touched">
+                        <div *ngIf="vaccineForm.get('doenca')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="qtdeDoses">
+                        Qtde. de Doses
+                    </label>
+                    <input type="text" id="qtdeDoses" class="form-control" formControlName="qtdeDoses">
+
+                    <div class="text-danger" *ngIf="vaccineForm.get('qtdeDoses')?.invalid && vaccineForm.get('qtdeDoses')?.touched">
+                        <div *ngIf="vaccineForm.get('qtdeDoses')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="intervaloProximaDose">
+                        Intervalo para próxima Dose (dias)
+                    </label>
+                    <input type="text" id="intervaloProximaDose" class="form-control" formControlName="intervaloProximaDose">
+
+                    <div class="text-danger" *ngIf="vaccineForm.get('intervaloProximaDose')?.invalid && vaccineForm.get('intervaloProximaDose')?.touched">
+                        <div *ngIf="vaccineForm.get('intervaloProximaDose')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="vaccineForm.invalid" type="submit" class="btn btn-primary float-end mt-3">
+        Salvar
+    </button>
+</form>

@@ -27,6 +27,16 @@ const routes: Routes = [
   },
 
   {
+    path: 'vaccines',
+    loadChildren: () => import('./pages/vaccine/vaccine.module').then(m => m.VaccineModule)
+  },
+
+  {
+    path: 'batches',
+    loadChildren: () => import('./pages/batch/batch.module').then(m => m.BatchModule)
+  },
+
+  {
     path: 'ageGroupsAndCampaigns',
     loadChildren: () => import('./pages/ageGroupsAndCampaigns/ageGroupsAndCampaigns.module').then(m => m.AgeGroupsAndCampaignsModule)
   },

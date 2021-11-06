@@ -1,0 +1,166 @@
+<div class="row mb-4 mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Formulário de Lotes
+        </h1>
+    </div>
+    <div class="col-md">
+        <a routerLink="/batches" class="btn btn-secondary float-end">
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form [formGroup]="batchForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o lote
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="nomeVacina">
+                        Nome da vacina
+                    </label>
+                    <select class="form-select" id="nomeVacina" formControlName="nome">
+                        <option *ngFor="let vT of vaccineTypes" [ngValue]="vT.valor">{{ vT.nome }}</option>
+                    </select>
+
+                    <div class="text-danger" *ngIf="batchForm.get('nome')?.invalid && batchForm.get('nome')?.touched">
+                        <div *ngIf="batchForm.get('nome')?.errors?.required">dado obrigatório</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="lote">
+                        Lote
+                    </label>
+                    <input type="text" id="lote" class="form-control" formControlName="lote">
+
+                    <div class="text-danger" *ngIf="batchForm.get('lote')?.invalid && batchForm.get('lote')?.touched">
+                        <div *ngIf="batchForm.get('lote')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="fabricante">
+                        Fabricante
+                    </label>
+                    <select class="form-select" id="fabricante" formControlName="fabricante">
+                        <option *ngFor="let mT of manufactureTypes" [ngValue]="mT.valor">{{ mT.nome }}</option>
+                    </select>
+
+                    <!--VALIDATOR NÃO FUNCIONA-->
+                    <div class="text-danger" *ngIf="batchForm.get('fabricante')?.invalid && batchForm.get('fabricante')?.touched">
+                        <div *ngIf="batchForm.get('fabricante')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="dataEntrada">
+                        Data de Entrada
+                    </label>
+
+                    <!--ENVIA OS DADOS ASSIM?-->
+                    <p-calendar [(ngModel)]="dataEntrada"
+                            id="dataEntrada"
+                            inputStyleClass="form-control"
+                            dataType="string"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [monthNavigator]="true"
+                            [yearNavigator]="true"
+                            yearRange={{yearRange}}
+                            formControlName="dataEntrada"
+                            >
+                    </p-calendar>
+                    <!--VALIDATOR NÃO FUNCIONA-->    
+                    <div class="text-danger" *ngIf="batchForm.get('dataEntrada')?.invalid && batchForm.get('dataEntrada')?.touched">
+                        <div *ngIf="batchForm.get('dataEntrada')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+            
+            
+                <div class="form-group col-md-2">
+                    <label for="dataValidade">
+                        Data de Validade
+                    </label>
+
+                    <!--ENVIA OS DADOS ASSIM?-->
+                    <p-calendar [(ngModel)]="dataValidade"
+                            id="dataValidade"
+                            inputStyleClass="form-control"
+                            dataType="string"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [monthNavigator]="true"
+                            [yearNavigator]="true"
+                            yearRange={{yearRange}}
+                            formControlName="dataValidade"
+                            >
+                    </p-calendar>
+                    <!--VALIDATOR NÃO FUNCIONA-->
+                    <div class="text-danger" *ngIf="batchForm.get('dataValidade')?.invalid && batchForm.get('dataValidade')?.touched">
+                        <div *ngIf="batchForm.get('dataValidade')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+            
+            </div>
+      
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="qtdeFrascos">
+                        Qtd. de Frascos
+                    </label>
+                    <br>
+                    <br>
+                    <input type="text" id="qtdeFrascos" class="form-control" formControlName="qtdeFrascos">
+
+                    <div class="text-danger" *ngIf="batchForm.get('qtdeFrascos')?.invalid && batchForm.get('qtdeFrascos')?.touched">
+                        <div *ngIf="batchForm.get('qtdeFrascos')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="aplicacoesPorFrasco">
+                        Aplicações por Frasco
+                    </label>
+                    <br>
+                    <br>
+                    <input type="text" id="aplicacoesPorFrasco" class="form-control" formControlName="aplicacoesPorFrasco">
+
+                    <div class="text-danger" *ngIf="batchForm.get('aplicacoesPorFrasco')?.invalid && batchForm.get('aplicacoesPorFrasco')?.touched">
+                        <div *ngIf="batchForm.get('aplicacoesPorFrasco')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-2">
+                    <label for="totalAplicacoesPossiveis">
+                        Total de aplicações possíveis
+                    </label>
+                    <input type="text" id="totalAplicacoesPossiveis" class="form-control" formControlName="totalAplicacoesPossiveis">
+
+                    <div class="text-danger" *ngIf="batchForm.get('totalAplicacoesPossiveis')?.invalid && batchForm.get('totalAplicacoesPossiveis')?.touched">
+                        <div *ngIf="batchForm.get('totalAplicacoesPossiveis')?.errors?.required">dado obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <button [disabled]="batchForm.invalid" type="submit" class="btn btn-primary float-end mt-3">
+        Salvar
+    </button>
+</form>
