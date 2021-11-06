@@ -1,0 +1,78 @@
+<div class="row mt-5">
+    <div class="col-md">
+        <h1 class="h2 border-left pl-2">
+            Vacinas
+        </h1>
+    </div>
+    <div class="col-md text-end">
+        <a routerLink="new" class="btn btn-success">
+            + Nova Vacina
+        </a>
+    </div>
+</div>
+
+<div class="card mt-2 mb-3">
+    <div class="card-header">
+        Filtros
+    </div>
+
+    <div class="card-body ps-3">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="nome">
+                    Nome
+                </label>
+                <input type="text" id="nome" class="form-control" [(ngModel)]='filter.nome'>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="cpf">
+                    Doença
+                </label>
+                <input type="text" id="doenca" class="form-control" [(ngModel)]='filter.doenca'>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <a (click)='getAll()' class="btn btn-warning" style="width: 130px;">
+                    Filtrar
+                </a>
+            </div>
+
+            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
+                <a (click)='limparFiltros()' class="btn btn-danger" style="width: 130px;">
+                    Limpar Filtros
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-primary text-light">
+            <th>Nome da vacina</th>
+            <th>Doença</th>
+            <th>Qtde. doses</th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vaccine of vaccines">
+            <td>
+                <small>{{ vaccine.nome }}</small>
+            </td>
+            <td>
+                <!--DÚVIDA ABAIXO, DEVO LIGAR VACINA E DOENÇA? OU VAI SER FEITO DE OUTRO FORMA?-->
+                <small>{{ vaccine.doenca?.nome }}</small>
+            </td>
+            <td>
+                <small>{{ vaccine.qtdeDoses }}</small>
+            </td>
+            <td class="text-center">
+                <a [routerLink]="['edit', vaccine.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <!--ABAIXO VAI FICAR EXCLUIR MESMO?-->
+                <a (click)="delete(vaccine)" class="btn btn-outline-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
