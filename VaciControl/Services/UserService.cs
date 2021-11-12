@@ -2,13 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Security.Cryptography;
+using System.Text;
 using VaciControl.DTOs;
 using VaciControl.Models;
 using VaciControl.Repositories;
 using VaciControl.UoW;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace VaciControl.Services
 {
@@ -48,7 +47,7 @@ namespace VaciControl.Services
 
         public UserDto GetById(Guid id)
         {
-            var user = _userRepository.GetById(x => x.Id == id);
+            var user = _userRepository.GetById(x => x.Id == id).FirstOrDefault();
             var userDto = _mapper.Map<UserDto>(user);
 
             return userDto;
@@ -97,7 +96,7 @@ namespace VaciControl.Services
             //user.Password = EncryptPassword(user.Password);
 
             /* o CPF no banco está salvo com a mask, por isso ao comparar lembrar de passar ela */
-            User _user = _userRepository.GetByCPF(x => x.Status && x.Cpf == user.CPF && x.Password.ToLower() == user.Password.ToLower());           
+            User _user = _userRepository.GetByCPF(x => x.Status && x.Cpf == user.CPF && x.Password.ToLower() == user.Password.ToLower()).FirstOrDefault();           
 
             if (_user == null)
                 throw new Exception("User not found");

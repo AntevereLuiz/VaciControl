@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using VaciControl.Persistense;
@@ -30,13 +31,14 @@ namespace VaciControl.Repositories
             return _context.Set<T>().AsNoTracking();
         }
 
-        public virtual T GetById(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> GetById(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().SingleOrDefault(predicate);
+            return _context.Set<T>().Where(predicate).AsNoTracking();
         }
 
         public void Insert(T entity)
         {
+            _context.Entry(entity).State = EntityState.Added;
             _context.Set<T>().Add(entity);
         }
 

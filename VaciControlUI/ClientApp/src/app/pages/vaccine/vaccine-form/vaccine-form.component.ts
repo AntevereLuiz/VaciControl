@@ -6,6 +6,9 @@ import { Vaccine } from '../models/vaccine.model';
 import { VaccineService } from '../services/vaccine.service';
 import * as toastr from "toastr";
 import { Guid } from 'guid-typescript';
+import { DiseaseService } from '../../disease/services/disease.service';
+import { Disease } from '../../disease/models/disease.model';
+import { DiseaseFilter } from '../../disease/filter/DiseaseFilter';
 
 @Component({
   selector: 'app-vaccine-form',
@@ -14,28 +17,34 @@ import { Guid } from 'guid-typescript';
 })
 export class VaccineFormComponent implements OnInit {
 
-  //DISEASE TYPES PRECISA PUXAR DO BANCO?
-  //E VALOR, QUAL PONHO?
-  diseaseTypes = [{nome: "Selecione a Doença"},
-                  {nome: "Covid"},
-                  {nome: "Sarampo"},
-                  {nome: "Rubéola"} ];
-
   constructor(private vaccineService: VaccineService,
               private route: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private diseaseService: DiseaseService) { }
+
+
   
   currentAction: string;
   vaccineForm: FormGroup;
   serverErrorMessages: string[];
   submitiingForm: boolean = false;
   vaccine: Vaccine = new Vaccine();
+  diseases: Disease[] = [];
+
+  filter: DiseaseFilter = { nome: '' };
 
   ngOnInit(): void {
     this.setCurrentAction();
     this.buildVaccineForm();
-    this.loadVaccine();
+    this.getDiseases();
+  }
+
+  getDiseases(){
+    this.diseaseService.getAll(this.filter).subscribe(
+      (diseases) => { this.diseases = diseases; this.loadVaccine() },
+      error => toastr.error('Erro ao listar as doenças.')
+    )
   }
 
   private setCurrentAction() {
@@ -51,10 +60,9 @@ export class VaccineFormComponent implements OnInit {
   private buildVaccineForm(){
     this.vaccineForm = this.formBuilder.group({
       id: [null],
-      nome: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      //ABAIXO DEIXO SÓ REQUIRED?
-      doenca: [null, [Validators.required]],
-      qtdeDoses: [null, [Validators.required]],
+      name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      disease: [null, [Validators.required]],
+      amount: [null, [Validators.required]],
       intervaloProximaDose: [null, [Validators.required]]
     });
   }
@@ -86,7 +94,8 @@ export class VaccineFormComponent implements OnInit {
 
   private createVaccine(){
     const vaccine: Vaccine = Object.assign(new Vaccine(), this.vaccineForm.value);
-
+    vaccine.diseaseId = vaccine.disease?.id;
+    
     this.vaccineService.create(vaccine)
     .subscribe(
       vaccine => { this.actionsForSuccess(vaccine); this.router.navigateByUrl('vaccines')},
@@ -96,6 +105,7 @@ export class VaccineFormComponent implements OnInit {
 
   private updateVaccine(){
     const vaccine: Vaccine = Object.assign(new Vaccine(), this.vaccineForm.value);
+    vaccine.diseaseId = vaccine.disease?.id;
 
     this.vaccineService.update(vaccine)
     .subscribe(

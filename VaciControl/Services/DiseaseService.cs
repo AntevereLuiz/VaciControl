@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VaciControl.DTOs;
 using VaciControl.Models;
 using VaciControl.Repositories;
@@ -34,7 +35,7 @@ namespace VaciControl.Services
 
         public DiseaseDto GetById(Guid id)
         {
-            var disease = _diseaseRepository.GetById(x => x.Id == id);
+            var disease = _diseaseRepository.GetById(x => x.Id == id).FirstOrDefault();
             var diseaseDto = _mapper.Map<DiseaseDto>(disease);
 
             return diseaseDto;

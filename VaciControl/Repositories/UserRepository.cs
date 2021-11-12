@@ -20,7 +20,7 @@ namespace VaciControl.Repositories
             return GetAll().Where(predicate).ToList();
         }
         
-        public User GetByCPF(Expression<Func<User, bool>> predicate)
+        public IQueryable<User> GetByCPF(Expression<Func<User, bool>> predicate)
         {
             return GetById(predicate);
         }       

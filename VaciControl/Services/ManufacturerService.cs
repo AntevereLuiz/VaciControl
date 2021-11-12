@@ -65,7 +65,7 @@ namespace VaciControl.Services
 
         public ManufacturerDto GetById(Guid id)
         {
-            var manufacturer = _manufacturerRepository.GetById(x => x.Id == id);
+            var manufacturer = _manufacturerRepository.GetById(x => x.Id == id).FirstOrDefault();
             var manufacturerDto = _mapper.Map<ManufacturerDto>(manufacturer);
 
             return manufacturerDto;
