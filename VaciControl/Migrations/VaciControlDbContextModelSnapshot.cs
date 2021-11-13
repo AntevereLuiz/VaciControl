@@ -19,6 +19,56 @@ namespace VaciControl.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("VaciControl.Models.AgeGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CampaignId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateIni")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MaxAge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinAge")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CampaignId");
+
+                    b.ToTable("AgeGroups");
+                });
+
+            modelBuilder.Entity("VaciControl.Models.Campaign", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CampaignName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DiseaseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.ToTable("Campaigns");
+                });
+
             modelBuilder.Entity("VaciControl.Models.Disease", b =>
                 {
                     b.Property<Guid>("Id")
@@ -130,6 +180,24 @@ namespace VaciControl.Migrations
                     b.ToTable("Vaccine");
                 });
 
+            modelBuilder.Entity("VaciControl.Models.AgeGroup", b =>
+                {
+                    b.HasOne("VaciControl.Models.Campaign", null)
+                        .WithMany("AgeGroups")
+                        .HasForeignKey("CampaignId");
+                });
+
+            modelBuilder.Entity("VaciControl.Models.Campaign", b =>
+                {
+                    b.HasOne("VaciControl.Models.Disease", "Disease")
+                        .WithMany()
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Disease");
+                });
+
             modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
                 {
                     b.HasOne("VaciControl.Models.Disease", "Disease")
@@ -139,6 +207,11 @@ namespace VaciControl.Migrations
                         .IsRequired();
 
                     b.Navigation("Disease");
+                });
+
+            modelBuilder.Entity("VaciControl.Models.Campaign", b =>
+                {
+                    b.Navigation("AgeGroups");
                 });
 #pragma warning restore 612, 618
         }

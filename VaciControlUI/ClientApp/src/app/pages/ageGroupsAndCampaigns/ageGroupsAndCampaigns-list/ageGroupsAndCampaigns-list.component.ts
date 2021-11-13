@@ -23,25 +23,25 @@ import * as toastr from "toastr";
     constructor(private ageGroupsAndCampaignsService: AgeGroupsAndCampaignsService) { }
   
     ngOnInit(): void {
-      //this.getAll();
+      this.getAll();
     }
   
-    /*getAll(){  
-      this.ageGroupsAndCampaignsService.getAll(this.filter).subscribe(
-        ageGroupsAndCampaigns => this.ageGroupsAndCampaigns = ageGroupsAndCampaigns,
-        error => alert('Erro ao listar as campanhas.')
-      )
-    }*/    
+    getAll(){  
+      // this.ageGroupsAndCampaignsService.getAll(this.filter).subscribe(
+      //   ageGroupsAndCampaigns => this.ageGroupsAndCampaigns = ageGroupsAndCampaigns,
+      //   error => alert('Erro ao listar as campanhas.')
+      // )
+    }   
   
-    /*
-    delete(Campaigns : Campaigns){
+    
+    delete(campaigns : Campaigns){
       const mustDelete = confirm('Realmente deseja inativar essa Campanha?');
   
       if(mustDelete){
-        this.ageGroupsAndCampaignsService.delete(ageGroupsAndCampaigns).subscribe(
+        this.ageGroupsAndCampaignsService.delete(campaigns).subscribe(
           () => {
             toastr.success('A campanha foi inativado!')
-            //this.getAll();
+            this.getAll();
           },
           () => toastr.error('Erro ao tentar excluir!'),
         )
@@ -49,10 +49,10 @@ import * as toastr from "toastr";
     }
   
     limparFiltros() {
-      this.filter = { campaignName: '', 
-                      disease: '',                                             
-                      status: undefined };
-    }*/
+      // this.filter = { campaignName: '', 
+      //                 disease: '',                                             
+      //                 status: undefined };
+    }
   
   }
   
