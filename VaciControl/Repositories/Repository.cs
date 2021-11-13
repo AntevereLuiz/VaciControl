@@ -37,6 +37,7 @@ namespace VaciControl.Repositories
 
         public void Insert(T entity)
         {
+            _context.Entry(entity).State = EntityState.Added;
             _context.Set<T>().Add(entity);
         }
 

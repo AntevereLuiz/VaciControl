@@ -50,6 +50,11 @@ namespace VaciControl
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDiseaseService, DiseaseService>();
             services.AddScoped<IDiseaseRepository, DiseaseRepository>();
+            services.AddScoped<ICampaignService, CampaignService>();
+            services.AddScoped<ICampaignRepository, CampaignRepository>();
+            services.AddScoped<IAgeGroupService, AgeGroupService>();
+            services.AddScoped<IAgeGroupRepository, AgeGroupRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var mapperConfig = new MapperConfiguration(x =>

@@ -7,6 +7,7 @@ export class Campaigns{
         public id?: Guid,
         public campaignName?: string,
         public disease?: Disease,
+        public diseaseId?: Guid,
         public status?: boolean,
         public ageGroups?: AgeGroups[]        
     ){}
