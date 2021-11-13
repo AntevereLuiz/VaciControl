@@ -11,7 +11,7 @@ using VaciControl.Persistense;
 using VaciControl.Repositories;
 using VaciControl.Services;
 using VaciControl.UoW;
-//Adicionados por causa da Autenticação
+//Adicionados por causa da Autenticaï¿½ï¿½o
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using VaciControl.Models;
@@ -50,6 +50,8 @@ namespace VaciControl
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDiseaseService, DiseaseService>();
             services.AddScoped<IDiseaseRepository, DiseaseRepository>();
+            services.AddScoped<IBatchService, BatchService>();
+            services.AddScoped<IBatchRepository, BatchRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var mapperConfig = new MapperConfiguration(x =>
@@ -66,15 +68,15 @@ namespace VaciControl
             });
 
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            services.AddAuthentication(x => //Criando um objeto de Autenticação falando qual é o esquema padrão de autenticação e o challenge
+            services.AddAuthentication(x => //Criando um objeto de Autenticaï¿½ï¿½o falando qual ï¿½ o esquema padrï¿½o de autenticaï¿½ï¿½o e o challenge
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
-                x.RequireHttpsMetadata = false; //HTTPS nesse caso não é obrigatório 
+                x.RequireHttpsMetadata = false; //HTTPS nesse caso nï¿½o ï¿½ obrigatï¿½rio 
                 x.SaveToken = true; //Salvar o token
-                x.TokenValidationParameters = new TokenValidationParameters //PArâmetros da validação dos tokens
+                x.TokenValidationParameters = new TokenValidationParameters //PArï¿½metros da validaï¿½ï¿½o dos tokens
                 {
                     ValidateIssuerSigningKey = true, //Reconhecer assinatura da chave 
                     IssuerSigningKey = new SymmetricSecurityKey(key), //Envia a chave 
@@ -96,7 +98,7 @@ namespace VaciControl
 
             app.UseRouting();
 
-            //Gerencia as chaves privadas e públicas
+            //Gerencia as chaves privadas e pï¿½blicas
             app.UseAuthentication();
 
             app.UseAuthorization();

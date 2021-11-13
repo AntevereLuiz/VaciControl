@@ -12,6 +12,7 @@ namespace VaciControl.Mapper
             CreateMap<Manufacturer, ManufacturerDto>().ReverseMap();
             CreateMap<Patient, PatientDto>().ReverseMap();
             CreateMap<Disease, DiseaseDto>().ReverseMap();
+            CreateMap<Batch, BatchDto>().ReverseMap();
         }
     }
 }

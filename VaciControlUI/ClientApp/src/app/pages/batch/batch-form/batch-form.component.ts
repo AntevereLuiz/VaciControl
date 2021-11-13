@@ -56,7 +56,7 @@ export class BatchFormComponent implements OnInit {
   private buildBatchForm() {
     this.batchForm = this.formBuilder.group({
       id: [null],
-      nome: [null, [Validators.required]],
+      nomeVacina: [null, [Validators.required]],
       lote: [null, [Validators.required]],
       fabricante: [null, [Validators.required]],
       qtdeFrascos: [null, [Validators.required]],

@@ -13,10 +13,11 @@ import * as toastr from "toastr";
 export class BatchListComponent implements OnInit {
 
   batches: Batch[] = [];
-  filter: BatchFiler = { nome: '',
+  filter: BatchFiler = { //nome: '', NOME DA VACINA, ACHO QUE PODE APAGAR
+                         vacina: '',
                          fabricante: '',
                          dataValidade: undefined,
-                         vacina: ''};
+                         };
   
   dataValidade: string;
   //PRECISO MUDAR ABAIXO?
@@ -58,7 +59,8 @@ export class BatchListComponent implements OnInit {
   }
 
   limparFiltros() {
-    this.filter = { nome: '', 
+    this.filter = { //nome: '', NOME DA VACINA, ACHO QUE PODE APAGAR
+                    vacina: '', 
                     fabricante: '',
                     dataValidade: undefined };
     this.dataValidade = '';
