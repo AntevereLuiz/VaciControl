@@ -24,12 +24,12 @@
                     <label for="nomeVacina">
                         Nome da vacina
                     </label>
-                    <select class="form-select" id="nomeVacina" formControlName="nome">
+                    <select class="form-select" id="nomeVacina" formControlName="nomeVacina">
                         <option *ngFor="let vT of vaccineTypes" [ngValue]="vT.valor">{{ vT.nome }}</option>
                     </select>
 
-                    <div class="text-danger" *ngIf="batchForm.get('nome')?.invalid && batchForm.get('nome')?.touched">
-                        <div *ngIf="batchForm.get('nome')?.errors?.required">dado obrigatório</div>
+                    <div class="text-danger" *ngIf="batchForm.get('nomeVacina')?.invalid && batchForm.get('nomeVacina')?.touched">
+                        <div *ngIf="batchForm.get('nomeVacina')?.errors?.required">dado obrigatório</div>
                     </div>
 
                 </div>
