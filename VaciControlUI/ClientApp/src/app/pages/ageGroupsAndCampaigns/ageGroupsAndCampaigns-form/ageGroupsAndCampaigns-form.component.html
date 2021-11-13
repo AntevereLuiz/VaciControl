@@ -39,16 +39,16 @@
                     <label for="diseaseName">
                         Doença
                     </label>
-                    <!--<select class="form-select" id="disease" [(ngModel)]=''>-->
-                    <select class="form-select" id="disease">
-                        <option *ngFor="let disease of dropdownDisease">{{disease}}</option>
+                    <select class="form-select" id="disease" formControlName="disease">
+                        <option [ngValue]="null">Selecione uma doença</option>
+                        <option *ngFor="let dT of diseases" [ngValue]="dT" [selected]="dT.id === campaign?.disease?.id">{{ dT.nome }}</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <div formArrayName="ageGroup">
-            <div  *ngFor="let ageGroup of ageGroup.controls; let i = index">
+        <div formArrayName="ageGroups">
+            <div  *ngFor="let ageGroup of ageGroups.controls; let i = index">
                 <div [formGroupName]="i">
                     <div class="card-body">
                         <div class="row">
@@ -56,13 +56,13 @@
                                 <label for="minimumAge">
                                     Idade Mínima
                                 </label>
-                                <input type="text" class="form-control" formControlName="minAge">
+                                <input type="number" class="form-control" formControlName="minAge">
 
                                 <div class="text-danger">
                                     <div
-                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.minAge')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?.minAge')?.touched">
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?.minAge')?.invalid && ageGroupsAndCampaignsForm.get('ageGroups?.minAge')?.touched">
                                     </div>
-                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.minAge')?.errors?.required">dado
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?.minAge')?.errors?.required">dado
                                         obrigatório</div>
                                 </div>
                             </div>
@@ -71,13 +71,13 @@
                                 <label for="maximumAge">
                                     Idade Máxima
                                 </label>
-                                <input type="text" class="form-control" formControlName="maxAge">
+                                <input type="number" class="form-control" formControlName="maxAge">
 
                                 <div class="text-danger">
                                     <div
-                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.maxAge')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?.maxAge')?.touched">
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?.maxAge')?.invalid && ageGroupsAndCampaignsForm.get('ageGroups?.maxAge')?.touched">
                                     </div>
-                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.maxAge')?.errors?.required">dado
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?.maxAge')?.errors?.required">dado
                                         obrigatório </div>
                                 </div>
                             </div>
@@ -94,9 +94,9 @@
 
                                 <div class="text-danger">
                                     <div
-                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.dateIni')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?.dateIni')?.touched">
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?.dateIni')?.invalid && ageGroupsAndCampaignsForm.get('ageGroups?.dateIni')?.touched">
                                     </div>
-                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?.dateIni')?.errors?.required">dado
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?.dateIni')?.errors?.required">dado
                                         obrigatório</div>
                                 </div>
                             </div>
@@ -113,9 +113,9 @@
 
                                 <div class="text-danger">
                                     <div
-                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?dateFim')?.invalid && ageGroupsAndCampaignsForm.get('ageGroup?dateFim')?.touched">
+                                        *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?dateFim')?.invalid && ageGroupsAndCampaignsForm.get('ageGroups?dateFim')?.touched">
                                     </div>
-                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroup?dateFim')?.errors?.required">dado
+                                    <div *ngIf="ageGroupsAndCampaignsForm.get('ageGroups?dateFim')?.errors?.required">dado
                                         obrigatório</div>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@ import { Campaigns } from '../models/Campaigns.model';
   })
   export class AgeGroupsAndCampaignsService {
   
-    private apiPath: string = "http://localhost:56808/api/ageGroupsAndCampaigns"
+    private apiPath: string = "http://localhost:56808/api/ageGroupAndCampaign"    
   
     constructor(private http: HttpClient) { }
   
@@ -34,28 +34,27 @@ import { Campaigns } from '../models/Campaigns.model';
       );
     }
         
-    create(ageGroupsAndCampaigns: Campaigns) : Observable<Campaigns> {
-      return this.http.post(this.apiPath, ageGroupsAndCampaigns).pipe(
+    create(ageGroupAndCampaign: Campaigns) : Observable<Campaigns> {
+      return this.http.post(this.apiPath, ageGroupAndCampaign).pipe(
         catchError(this.handleError),
         map(this.jsonToUser)
       );
     }
   
-    update(ageGroupsAndCampaigns: Campaigns) : Observable<Campaigns> {
-      return this.http.put(`${this.apiPath}/${ageGroupsAndCampaigns.id}`, ageGroupsAndCampaigns).pipe(
+    update(ageGroupAndCampaign: Campaigns) : Observable<Campaigns> {
+      return this.http.put(`${this.apiPath}/${ageGroupAndCampaign.id}`, ageGroupAndCampaign).pipe(
         catchError(this.handleError),
-        map(() => ageGroupsAndCampaigns)
+        map(() => ageGroupAndCampaign)
       );
     }
   
-    delete(ageGroupsAndCampaigns: Campaigns) : Observable<any> {
-      return this.http.put(`${this.apiPath}/remove/${ageGroupsAndCampaigns.id}`, ageGroupsAndCampaigns).pipe(
+    delete(ageGroupAndCampaign: Campaigns) : Observable<any> {
+      return this.http.put(`${this.apiPath}/remove/${ageGroupAndCampaign.id}`, ageGroupAndCampaign).pipe(
         catchError(this.handleError),
         map(() => null)
       );
     }
-    
-  
+      
     private jsonToUser(json: any): Campaigns {
       return json as Campaigns;
     }

@@ -14,6 +14,8 @@ namespace VaciControl.Persistense
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Disease> Diseases { get; set; }
+        public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<AgeGroup> AgeGroups { get; set; }
         public DbSet<Vaccine> Vaccine { get; set; }
     }
 }

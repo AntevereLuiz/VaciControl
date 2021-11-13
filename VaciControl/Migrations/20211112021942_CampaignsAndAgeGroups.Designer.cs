@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VaciControl.Persistense;
 
 namespace VaciControl.Migrations
 {
     [DbContext(typeof(VaciControlDbContext))]
-    partial class VaciControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112021942_CampaignsAndAgeGroups")]
+    partial class CampaignsAndAgeGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,42 +155,6 @@ namespace VaciControl.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("DiseaseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("IntervaloProximaDose")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DiseaseId");
-
-                    b.ToTable("Vaccine");
-                });
-
-            modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
-                {
-                    b.HasOne("VaciControl.Models.Disease", "Disease")
-                        .WithMany()
-                        .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Disease");
                 });
 
             modelBuilder.Entity("VaciControl.Models.AgeGroup", b =>

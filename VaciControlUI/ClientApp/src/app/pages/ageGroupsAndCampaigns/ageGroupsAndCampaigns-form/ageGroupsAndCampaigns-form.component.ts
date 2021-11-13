@@ -8,6 +8,9 @@ import * as moment from 'moment';
 import { AgeGroupsAndCampaignsService } from '../services/ageGroupsAndCampaigns.service';
 import { Campaigns } from '../models/Campaigns.model';
 import { AgeGroups } from './../models/AgeGroups.model';
+import { DiseaseService } from './../../disease/services/disease.service';
+import { DiseaseFilter } from '../../disease/filter/DiseaseFilter';
+import { Disease } from '../../disease/models/disease.model';
 
 @Component({
     selector: 'app-ageGroupsAndCampaigns-form',
@@ -19,28 +22,38 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
     constructor(private ageGroupsAndCampaignsService: AgeGroupsAndCampaignsService,
         private route: ActivatedRoute,
         private router: Router,
-        private formBuilder: FormBuilder) { }
+        private formBuilder: FormBuilder,
+        private diseaseService: DiseaseService) { }
     
     currentAction: string;
     ageGroupsAndCampaignsForm: FormGroup;
     serverErrorMessages: string[];
     submitiingForm: boolean = false;
-    campaign: Campaigns = new Campaigns(undefined, '', undefined, undefined, []);            
-    dropdownDisease : any = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4'];  
+    campaign: Campaigns = new Campaigns(undefined, '', undefined, undefined, undefined, []);                  
     yearRange: string = "1900:" + new Date().getFullYear().toString();            
     initialDate: string;
-    finalDate: string;        
-        
+    finalDate: string;            
+    filter: DiseaseFilter = { nome: '' };
+    diseases: Disease[] = [];
+       
     ngOnInit(): void {      
-        this.setCurrentAction();        
+      this.setCurrentAction();        
          
-        if (this.currentAction = 'new') {
-          this.campaign?.ageGroups?.push(new AgeGroups(Guid.create(), undefined, undefined, undefined, undefined));
-        } 
+      if (this.currentAction = 'new') {
+        this.campaign?.ageGroups?.push(new AgeGroups(undefined, undefined, undefined, undefined, undefined));
+      } 
                
-        this.buildAgeGroupsAndCampaignsForm();  
-        this.inserir(0);      
-        this.loadAgeGroupsAndCampaigns();
+      this.buildAgeGroupsAndCampaignsForm();  
+      this.inserir(0);      
+      this.loadAgeGroupsAndCampaigns();
+      this.getDiseases();
+    }
+
+    getDiseases(){
+      this.diseaseService.getAll(this.filter).subscribe(
+        (diseases) => { this.diseases = diseases; this.loadAgeGroupsAndCampaigns() },
+        error => toastr.error('Erro ao listar as doenças.')
+      )
     }
 
     private setCurrentAction() {
@@ -58,17 +71,17 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
           campaignName: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
           status: [null],
           disease:[null],
-          ageGroup: this.formBuilder.array([]),         
+          ageGroups: this.formBuilder.array([]),         
         });
     }
 
-    get ageGroup(): FormArray {
-      return this.ageGroupsAndCampaignsForm.get('ageGroup') as FormArray;
+    get ageGroups(): FormArray {
+      return this.ageGroupsAndCampaignsForm.get('ageGroups') as FormArray;
     }
     
     private createAgeFormGroup(){
       return this.formBuilder.group({
-        id:[Guid.create()],
+        id:[null],
         minAge: [null, [Validators.required]],
         maxAge: [null, [Validators.required]],          
         dateIni: [null, [Validators.required]],
@@ -90,27 +103,34 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
         this.submitiingForm = true;
     
         if (this.currentAction == "new") {
-          //this.createAgeGroupsAndCampaigns();
+          this.createAgeGroupsAndCampaigns();
         }
         else {
-          //this.updateAgeGroupsAndCampaigns();
+          this.updateAgeGroupsAndCampaigns();
         }
     }
     
     public inserir(i: number){            
-      const newAgeFormArray = this.ageGroupsAndCampaignsForm.get('ageGroup') as FormArray
+      const newAgeFormArray = this.ageGroupsAndCampaignsForm.get('ageGroups') as FormArray
       newAgeFormArray.push(this.createAgeFormGroup());
-      this.ageGroupsAndCampaignsForm.get('ageGroup')?.setValue(newAgeFormArray.value);
+      this.ageGroupsAndCampaignsForm.get('ageGroups')?.setValue(newAgeFormArray.value);
       this.campaign.ageGroups?.push(newAgeFormArray.value[i]); 
     }
 
     public excluir(i: number){
-      this.ageGroup.removeAt(i);
+      this.ageGroups.removeAt(i);
     }
 
-    /*private createAgeGroupsAndCampaigns() {
+    private createAgeGroupsAndCampaigns() {
         let ageGroupsAndCampaigns: Campaigns = Object.assign(new Campaigns(), this.ageGroupsAndCampaignsForm.value);        
-    
+
+        ageGroupsAndCampaigns.diseaseId = ageGroupsAndCampaigns.disease?.id;
+        
+        ageGroupsAndCampaigns?.ageGroups?.forEach(element => {
+          element.dateIni =  moment(element.dateIni, 'DD/MM/YYYY').toDate();
+          element.dateFim =  moment(element.dateFim, 'DD/MM/YYYY').toDate();          
+        });             
+
         this.ageGroupsAndCampaignsService.create(ageGroupsAndCampaigns)
           .subscribe(
             ageGroupsAndCampaigns => { this.actionsForSuccess(ageGroupsAndCampaigns); this.router.navigateByUrl('ageGroupsAndCampaigns') },
@@ -126,7 +146,7 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
             ageGroupsAndCampaigns => { this.actionsForSuccess(ageGroupsAndCampaigns); this.router.navigateByUrl('ageGroupsAndCampaigns') },
             error => this.actionsForError(error)
           )
-    }*/
+    }
     
     private actionsForSuccess(ageGroupsAndCampaigns: Campaigns) {
         toastr.success("Solicitação efetuada com sucesso");
