@@ -10,8 +10,8 @@ using VaciControl.Persistense;
 namespace VaciControl.Migrations
 {
     [DbContext(typeof(VaciControlDbContext))]
-    [Migration("20211112021942_CampaignsAndAgeGroups")]
-    partial class CampaignsAndAgeGroups
+    [Migration("20211113011026_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -157,10 +157,35 @@ namespace VaciControl.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("DiseaseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("IntervaloProximaDose")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.ToTable("Vaccine");
+                });
+
             modelBuilder.Entity("VaciControl.Models.AgeGroup", b =>
                 {
                     b.HasOne("VaciControl.Models.Campaign", null)
-                        .WithMany("AgeGroup")
+                        .WithMany("AgeGroups")
                         .HasForeignKey("CampaignId");
                 });
 
@@ -175,9 +200,20 @@ namespace VaciControl.Migrations
                     b.Navigation("Disease");
                 });
 
+            modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
+                {
+                    b.HasOne("VaciControl.Models.Disease", "Disease")
+                        .WithMany()
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Disease");
+                });
+
             modelBuilder.Entity("VaciControl.Models.Campaign", b =>
                 {
-                    b.Navigation("AgeGroup");
+                    b.Navigation("AgeGroups");
                 });
 #pragma warning restore 612, 618
         }

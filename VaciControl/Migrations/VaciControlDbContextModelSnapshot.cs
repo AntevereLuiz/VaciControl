@@ -180,21 +180,10 @@ namespace VaciControl.Migrations
                     b.ToTable("Vaccine");
                 });
 
-            modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
-                {
-                    b.HasOne("VaciControl.Models.Disease", "Disease")
-                        .WithMany()
-                        .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Disease");
-                });
-
             modelBuilder.Entity("VaciControl.Models.AgeGroup", b =>
                 {
                     b.HasOne("VaciControl.Models.Campaign", null)
-                        .WithMany("AgeGroup")
+                        .WithMany("AgeGroups")
                         .HasForeignKey("CampaignId");
                 });
 
@@ -209,9 +198,20 @@ namespace VaciControl.Migrations
                     b.Navigation("Disease");
                 });
 
+            modelBuilder.Entity("VaciControl.Models.Vaccine", b =>
+                {
+                    b.HasOne("VaciControl.Models.Disease", "Disease")
+                        .WithMany()
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Disease");
+                });
+
             modelBuilder.Entity("VaciControl.Models.Campaign", b =>
                 {
-                    b.Navigation("AgeGroup");
+                    b.Navigation("AgeGroups");
                 });
 #pragma warning restore 612, 618
         }
