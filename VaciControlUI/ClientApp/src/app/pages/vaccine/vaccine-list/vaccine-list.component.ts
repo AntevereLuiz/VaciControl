@@ -12,11 +12,8 @@ import * as toastr from "toastr";
 export class VaccineListComponent implements OnInit {
 
   vaccines: Vaccine[] = [];
-  //O ABAIXO É PARA BUSCA NA LISTAGEM, NÃO?
-  filter: VaccineFilter = { nome: '',
-                            doenca: '',
-                            //NÃO TENHO CERTEZA O ABAIXO
-                            //qtdeDoses: undefined 
+  filter: VaccineFilter = { name: '',
+                            disease: '',
                           };
 
   constructor(private vaccineService: VaccineService) { }
@@ -33,7 +30,6 @@ export class VaccineListComponent implements OnInit {
   }
 
   delete(vaccine : Vaccine){
-    //ABAIXO, VAMOS EXCLUIR OU INATIVAR A VACINA?
     const mustDelete = confirm('Realmente deseja excluir a vacina?');
 
     if(mustDelete){
@@ -48,10 +44,8 @@ export class VaccineListComponent implements OnInit {
   }
 
   limparFiltros() {
-    this.filter = { nome: '', 
-                    doenca: '',
-                    //NÃO TENHO CERTEZA DO ABAIXO
-                    //qtdeDoses: undefined 
+    this.filter = { name: '', 
+                    disease: ''
                   };
   }
   

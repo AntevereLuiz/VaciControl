@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VaciControl.Persistense;
 
 namespace VaciControl.Migrations
 {
     [DbContext(typeof(VaciControlDbContext))]
-    partial class VaciControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112005449_CorrigindoIntervaloProximaDose")]
+    partial class CorrigindoIntervaloProximaDose
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +116,7 @@ namespace VaciControl.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("DiseaseId")
+                    b.Property<Guid?>("DiseaseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("IntervaloProximaDose")
@@ -134,9 +136,7 @@ namespace VaciControl.Migrations
                 {
                     b.HasOne("VaciControl.Models.Disease", "Disease")
                         .WithMany()
-                        .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiseaseId");
 
                     b.Navigation("Disease");
                 });

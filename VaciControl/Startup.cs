@@ -50,6 +50,8 @@ namespace VaciControl
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDiseaseService, DiseaseService>();
             services.AddScoped<IDiseaseRepository, DiseaseRepository>();
+            services.AddScoped<IVaccineService, VaccineService>();
+            services.AddScoped<IVaccineRepository, VaccineRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var mapperConfig = new MapperConfiguration(x =>
