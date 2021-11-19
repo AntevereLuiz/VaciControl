@@ -16,10 +16,9 @@ export class BatchListComponent implements OnInit {
   filter: BatchFiler = { nome: '',
                          fabricante: '',
                          dataValidade: undefined,
-                         vacina: ''};
+                         };
   
   dataValidade: string;
-  //PRECISO MUDAR ABAIXO?
   yearRange: string = "1900:" + new Date().getFullYear().toString();
 
   constructor(private batchService: BatchService) { }
@@ -29,10 +28,7 @@ export class BatchListComponent implements OnInit {
   }
 
   getAll(){
-
-    if(this.dataValidade)
-      this.filter.dataValidade = this.convertStringToDate(this.dataValidade);
-
+    this.filter.dataValidade = this.dataValidade ? this.convertStringToDate(this.dataValidade) : undefined;
     this.batchService.getAll(this.filter).subscribe(
       batches => this.batches = batches,
       error => toastr.error('Erro ao listar os lotes.')
@@ -58,7 +54,8 @@ export class BatchListComponent implements OnInit {
   }
 
   limparFiltros() {
-    this.filter = { nome: '', 
+    this.filter = {
+                    nome: '', 
                     fabricante: '',
                     dataValidade: undefined };
     this.dataValidade = '';

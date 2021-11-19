@@ -6,12 +6,13 @@ export class Batch{
     constructor(
         public id?: Guid,
         public nome?: string,
-        public lote?: string,
+        public vacinaId?: Guid,
+        public vacina?: Vaccine,
+        public fabricanteId?: Guid,
         public fabricante?: Manufacturer,
         public qtdeFrascos?: number,
         public dataEntrada?: any,
         public dataValidade?: any,
-        public vacina?: Vaccine,
         public aplicacoesPorFrasco?: number,
         public totalAplicacoesPossiveis?: number
     ){}

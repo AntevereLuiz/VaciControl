@@ -50,8 +50,7 @@ namespace VaciControl
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDiseaseService, DiseaseService>();
             services.AddScoped<IDiseaseRepository, DiseaseRepository>();
-            services.AddScoped<IBatchService, BatchService>();
-            services.AddScoped<IBatchRepository, BatchRepository>();
+<<<<<<< HEAD
             services.AddScoped<ICampaignService, CampaignService>();
             services.AddScoped<ICampaignRepository, CampaignRepository>();
             services.AddScoped<IAgeGroupService, AgeGroupService>();
@@ -59,6 +58,10 @@ namespace VaciControl
 
             services.AddScoped<IVaccineService, VaccineService>();
             services.AddScoped<IVaccineRepository, VaccineRepository>();
+=======
+            services.AddScoped<IBatchService, BatchService>();
+            services.AddScoped<IBatchRepository, BatchRepository>();
+>>>>>>> a2e378f (backLotes)
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var mapperConfig = new MapperConfiguration(x =>

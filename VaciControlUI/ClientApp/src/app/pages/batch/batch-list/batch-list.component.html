@@ -20,7 +20,7 @@
         <div class="row">
             <div class="form-group col-md-2">
                 <label for="nome">
-                    Nome
+                    Nome da Vacina
                 </label>
                 <input type="text" id="nome" class="form-control" [(ngModel)]='filter.nome'>
             </div>
@@ -32,12 +32,6 @@
                 <input type="text" id="fabricante" class="form-control" [(ngModel)]='filter.fabricante'>
             </div>
 
-            <div class="form-group col-md-2">
-                <label for="vacina">
-                    Vacina
-                </label>
-                <input type="text" id="vacina" class="form-control" [(ngModel)]='filter.vacina'>
-            </div>
 
             <div class="form-group col-md-2">
                 <label for="dataValidade">
@@ -75,9 +69,8 @@
 <table class="table table-hover">
     <thead>
         <tr class="bg-primary text-light">
-            <th>Nome</th>
+            <th>Nome da Vacina</th>
             <th>Fabricante</th>
-            <th>Vacina</th>
             <th>Qtde. Frascos</th>
             <th>Data Entrada</th>
             <th>Data Validade</th>
@@ -87,13 +80,10 @@
     <tbody>
         <tr *ngFor="let batch of batches">
             <td>
-                <small>{{ batch.nome }}</small>
+                <small>{{ batch.vacina?.name }}</small>
             </td>
             <td>
                 <small>{{ batch.fabricante?.nome }}</small>
-            </td>
-            <td>
-                <small>{{ batch.vacina?.name }}</small>
             </td>
             <td>
                 <small>{{ batch.qtdeFrascos }}</small>
