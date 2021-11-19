@@ -9,6 +9,7 @@ using VaciControl.Repositories;
 using VaciControl.UoW;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace VaciControl.Services
 {
@@ -37,10 +38,13 @@ namespace VaciControl.Services
 
         public List<BatchDto> GetAllWithConditions(BatchFilter filter)
         {
-            var batches = _batchRepository.GetAllWithConditions(x => x.Nome.Contains(filter.Nome) &&
-                                                                  //ESTÁ CERTO ABAIXO?
-                                                                  x.Fabricante.Nome.Contains(filter.Fabricante) &&
-                                                                  (filter.DataValidade == null || x.DataValidade == filter.DataValidade.Value.Date));
+            var batches = _batchRepository.GetAll().Where(x => x.Vacina.Name.Contains(filter.Nome) &&
+                                                               x.Fabricante.Nome.Contains(filter.Fabricante) &&
+                                                               (filter.DataValidade == null || x.DataValidade == filter.DataValidade.Value))
+                                                   .Include(x => x.Fabricante)
+                                                   .Include(x => x.Vacina)
+                                                   .ToList();
+
             var batchesDto = _mapper.Map<List<BatchDto>>(batches);
 
             return batchesDto;
@@ -48,13 +52,11 @@ namespace VaciControl.Services
 
         public BatchDto GetById(Guid id)
         {
-            var batch = _batchRepository.GetById(x => x.Id == id);
+            var batch = _batchRepository.GetById(x => x.Id == id).Include(x => x.Vacina).Include(x=>x.Fabricante).FirstOrDefault();
             var batchDto = _mapper.Map<BatchDto>(batch);
 
             return batchDto;
         }
-
-        //TEM QUE POR OS OUTRO FILTROS OU DEIXA SÓ O GETBYID?
 
         public void Insert(BatchDto batchDto)
         {
@@ -76,7 +78,7 @@ namespace VaciControl.Services
         {
             var batch = _mapper.Map<Batch>(batchDto);
 
-            _batchRepository.Update(batch);
+            _batchRepository.Delete(batch);
             _unitOfWork.Commit();
         }
     }

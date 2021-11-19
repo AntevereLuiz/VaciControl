@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   isAuthenticated: boolean = false;
 
   ngOnInit(): void {
-    this.authenticate();
+    //this.authenticate();
   }
   authenticate(){
     this.userService.authenticate(this.userLogin).subscribe((data:any) => {

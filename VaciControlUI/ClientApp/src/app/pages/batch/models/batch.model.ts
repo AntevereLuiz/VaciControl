@@ -5,9 +5,10 @@ import { Vaccine } from "../../vaccine/models/vaccine.model";
 export class Batch{
     constructor(
         public id?: Guid,
-        //public nome?: string, NOME DA VACINA, ACHO QUE PODE APAGAR
+        public nome?: string,
+        public vacinaId?: Guid,
         public vacina?: Vaccine,
-        public lote?: string,
+        public fabricanteId?: Guid,
         public fabricante?: Manufacturer,
         public qtdeFrascos?: number,
         public dataEntrada?: any,

@@ -21,27 +21,27 @@
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-8">
-                    <label for="nomeVacina">
+                    <label for="vacina">
                         Nome da vacina
                     </label>
-                    <select class="form-select" id="nomeVacina" formControlName="nomeVacina">
-                        <option *ngFor="let vT of vaccineTypes" [ngValue]="vT.valor">{{ vT.nome }}</option>
+                    <select class="form-select" id="vacina" formControlName="vacina">
+                        <option *ngFor="let vT of vaccineTypes" [ngValue]="vT" [selected]="vT.id === batch?.vacina?.id">{{ vT.name }}</option>
                     </select>
 
-                    <div class="text-danger" *ngIf="batchForm.get('nomeVacina')?.invalid && batchForm.get('nomeVacina')?.touched">
-                        <div *ngIf="batchForm.get('nomeVacina')?.errors?.required">dado obrigatório</div>
+                    <div class="text-danger" *ngIf="batchForm.get('vacina')?.invalid && batchForm.get('vacina')?.touched">
+                        <div *ngIf="batchForm.get('vacina')?.errors?.required">dado obrigatório</div>
                     </div>
 
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="lote">
+                    <label for="nome">
                         Lote
                     </label>
-                    <input type="text" id="lote" class="form-control" formControlName="lote">
+                    <input type="text" id="nome" class="form-control" formControlName="nome">
 
-                    <div class="text-danger" *ngIf="batchForm.get('lote')?.invalid && batchForm.get('lote')?.touched">
-                        <div *ngIf="batchForm.get('lote')?.errors?.required">dado obrigatório</div>
+                    <div class="text-danger" *ngIf="batchForm.get('nome')?.invalid && batchForm.get('nome')?.touched">
+                        <div *ngIf="batchForm.get('nome')?.errors?.required">dado obrigatório</div>
                     </div>
                 </div>
 
@@ -55,10 +55,9 @@
                         Fabricante
                     </label>
                     <select class="form-select" id="fabricante" formControlName="fabricante">
-                        <option *ngFor="let mT of manufactureTypes" [ngValue]="mT.valor">{{ mT.nome }}</option>
+                        <option *ngFor="let mT of manufactureTypes" [ngValue]="mT" [selected]="mT.id === batch?.fabricante?.id">{{ mT.nome }}</option>
                     </select>
 
-                    <!--VALIDATOR NÃO FUNCIONA-->
                     <div class="text-danger" *ngIf="batchForm.get('fabricante')?.invalid && batchForm.get('fabricante')?.touched">
                         <div *ngIf="batchForm.get('fabricante')?.errors?.required">dado obrigatório</div>
                     </div>
@@ -69,7 +68,6 @@
                         Data de Entrada
                     </label>
 
-                    <!--ENVIA OS DADOS ASSIM?-->
                     <p-calendar [(ngModel)]="dataEntrada"
                             id="dataEntrada"
                             inputStyleClass="form-control"
@@ -82,7 +80,6 @@
                             formControlName="dataEntrada"
                             >
                     </p-calendar>
-                    <!--VALIDATOR NÃO FUNCIONA-->    
                     <div class="text-danger" *ngIf="batchForm.get('dataEntrada')?.invalid && batchForm.get('dataEntrada')?.touched">
                         <div *ngIf="batchForm.get('dataEntrada')?.errors?.required">dado obrigatório</div>
                     </div>
@@ -93,8 +90,6 @@
                     <label for="dataValidade">
                         Data de Validade
                     </label>
-
-                    <!--ENVIA OS DADOS ASSIM?-->
                     <p-calendar [(ngModel)]="dataValidade"
                             id="dataValidade"
                             inputStyleClass="form-control"
@@ -107,7 +102,6 @@
                             formControlName="dataValidade"
                             >
                     </p-calendar>
-                    <!--VALIDATOR NÃO FUNCIONA-->
                     <div class="text-danger" *ngIf="batchForm.get('dataValidade')?.invalid && batchForm.get('dataValidade')?.touched">
                         <div *ngIf="batchForm.get('dataValidade')?.errors?.required">dado obrigatório</div>
                     </div>
@@ -125,7 +119,7 @@
                     </label>
                     <br>
                     <br>
-                    <input type="text" id="qtdeFrascos" class="form-control" formControlName="qtdeFrascos">
+                    <input type="number" min="0" id="qtdeFrascos" class="form-control" formControlName="qtdeFrascos" [(ngModel)]="qtFrascos" (change)="calculaQtd()">
 
                     <div class="text-danger" *ngIf="batchForm.get('qtdeFrascos')?.invalid && batchForm.get('qtdeFrascos')?.touched">
                         <div *ngIf="batchForm.get('qtdeFrascos')?.errors?.required">dado obrigatório</div>
@@ -138,7 +132,7 @@
                     </label>
                     <br>
                     <br>
-                    <input type="text" id="aplicacoesPorFrasco" class="form-control" formControlName="aplicacoesPorFrasco">
+                    <input type="number" id="aplicacoesPorFrasco" class="form-control" formControlName="aplicacoesPorFrasco" [(ngModel)]="apFrascos" (change)="calculaQtd()">
 
                     <div class="text-danger" *ngIf="batchForm.get('aplicacoesPorFrasco')?.invalid && batchForm.get('aplicacoesPorFrasco')?.touched">
                         <div *ngIf="batchForm.get('aplicacoesPorFrasco')?.errors?.required">dado obrigatório</div>
@@ -150,7 +144,7 @@
                     <label for="totalAplicacoesPossiveis">
                         Total de aplicações possíveis
                     </label>
-                    <input type="text" id="totalAplicacoesPossiveis" class="form-control" formControlName="totalAplicacoesPossiveis">
+                    <input type="text" id="totalAplicacoesPossiveis" class="form-control" formControlName="totalAplicacoesPossiveis" [(ngModel)]="totApli"  readonly>
 
                     <div class="text-danger" *ngIf="batchForm.get('totalAplicacoesPossiveis')?.invalid && batchForm.get('totalAplicacoesPossiveis')?.touched">
                         <div *ngIf="batchForm.get('totalAplicacoesPossiveis')?.errors?.required">dado obrigatório</div>
