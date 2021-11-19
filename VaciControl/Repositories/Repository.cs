@@ -36,6 +36,11 @@ namespace VaciControl.Repositories
             return _context.Set<T>().Where(predicate).AsNoTracking();
         }
 
+        public IQueryable<T> GetByIdTracking(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().Where(predicate);
+        }
+
         public void Insert(T entity)
         {
             _context.Entry(entity).State = EntityState.Added;

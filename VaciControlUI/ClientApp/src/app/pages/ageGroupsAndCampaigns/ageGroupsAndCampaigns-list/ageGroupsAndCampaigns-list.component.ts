@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-//import { AgeGroupsAndCampaignsFilter } from '../filter/ageGroupsAndCampaignsFilter';
 import { Campaigns } from '../models/Campaigns.model';
 import { AgeGroupsAndCampaignsService } from '../services/ageGroupsAndCampaigns.service';
 import * as toastr from "toastr";
+import { CampaignFilter } from '../filter/CampaignFilter';
 
 @Component({
     selector: 'app-ageGroupsAndCampaigns-list',
@@ -14,7 +14,7 @@ import * as toastr from "toastr";
   export class AgeGroupsAndCampaignsListComponent implements OnInit {
 
     campaigns: Campaigns[] = [];
-    //filter: AgeGroupsAndCampaignsFilter = { campaignName: '', disease: '', status: undefined };     
+    filter: CampaignFilter = { campaignName: '', disease: '', status: undefined };     
   
     selectTypes = [ { nome: "Todos", valor: undefined }, 
                     { nome: "Ativos", valor: true }, 
@@ -27,15 +27,14 @@ import * as toastr from "toastr";
     }
   
     getAll(){  
-      // this.ageGroupsAndCampaignsService.getAll(this.filter).subscribe(
-      //   ageGroupsAndCampaigns => this.ageGroupsAndCampaigns = ageGroupsAndCampaigns,
-      //   error => alert('Erro ao listar as campanhas.')
-      // )
+      this.ageGroupsAndCampaignsService.getAll(this.filter).subscribe(
+        campaigns => this.campaigns = campaigns,
+        error => alert('Erro ao listar as campanhas.')
+      )
     }   
-  
-    
+      
     delete(campaigns : Campaigns){
-      const mustDelete = confirm('Realmente deseja inativar essa Campanha?');
+      const mustDelete = confirm('Realmente deseja inativar essa campanha?');
   
       if(mustDelete){
         this.ageGroupsAndCampaignsService.delete(campaigns).subscribe(
@@ -43,16 +42,15 @@ import * as toastr from "toastr";
             toastr.success('A campanha foi inativado!')
             this.getAll();
           },
-          () => toastr.error('Erro ao tentar excluir!'),
+          () => toastr.error('Erro ao tentar inativar!'),
         )
       }
     }
   
     limparFiltros() {
-      // this.filter = { campaignName: '', 
-      //                 disease: '',                                             
-      //                 status: undefined };
-    }
-  
+      this.filter = { campaignName: '', 
+                      disease: '',                                             
+                      status: undefined };
+    }    
   }
   

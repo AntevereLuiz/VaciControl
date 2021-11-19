@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VaciControl.Persistense;
 
 namespace VaciControl.Migrations
 {
     [DbContext(typeof(VaciControlDbContext))]
-    partial class VaciControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211119015302_CampaignId")]
+    partial class CampaignId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,45 +47,6 @@ namespace VaciControl.Migrations
                     b.HasIndex("CampaignId");
 
                     b.ToTable("AgeGroups");
-                });
-
-            modelBuilder.Entity("VaciControl.Models.Batch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AplicacoesPorFrasco")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataEntrada")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataValidade")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("FabricanteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QtdeFrascos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalAplicacoesPossiveis")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("VacinaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FabricanteId");
-
-                    b.HasIndex("VacinaId");
-
-                    b.ToTable("Batches");
                 });
 
             modelBuilder.Entity("VaciControl.Models.Campaign", b =>
@@ -226,25 +189,6 @@ namespace VaciControl.Migrations
                         .HasForeignKey("CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("VaciControl.Models.Batch", b =>
-                {
-                    b.HasOne("VaciControl.Models.Manufacturer", "Fabricante")
-                        .WithMany()
-                        .HasForeignKey("FabricanteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VaciControl.Models.Vaccine", "Vacina")
-                        .WithMany()
-                        .HasForeignKey("VacinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Fabricante");
-
-                    b.Navigation("Vacina");
                 });
 
             modelBuilder.Entity("VaciControl.Models.Campaign", b =>

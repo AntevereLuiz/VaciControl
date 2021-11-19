@@ -6,6 +6,7 @@ export class AgeGroups{
         public minAge?: number,
         public maxAge?: number,
         public dateIni?: any,
-        public dateFim?: any                
+        public dateFim?: any,
+        public campaignId?: Guid
     ){}
 }

@@ -9,5 +9,6 @@ namespace VaciControl.DTOs
         public int MaxAge { get; set; }
         public DateTime DateIni { get; set; }
         public DateTime DateFim { get; set; }
+        public Guid CampaignId { get; set; }
     }
 }

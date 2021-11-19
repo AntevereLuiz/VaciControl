@@ -6,8 +6,8 @@ import { map, catchError, mergeMap } from 'rxjs/operators';
 
 import { Guid } from 'guid-typescript';
 
-//import { ageGroupsAndCampaignsFilter } from '../filter/ageGroupsAndCampaignsFilter';
 import { Campaigns } from '../models/Campaigns.model';
+import { CampaignFilter } from '../filter/CampaignFilter';
 
 @Injectable({
     providedIn: 'root'
@@ -18,14 +18,13 @@ import { Campaigns } from '../models/Campaigns.model';
   
     constructor(private http: HttpClient) { }
   
-    /*
-    getAll(filter: AgeGroupsAndCampaignsFilter): Observable<Campaigns[]> {
+    
+    getAll(filter: CampaignFilter): Observable<Campaigns[]> {
       return this.http.post<Campaigns[]>(`${this.apiPath}/filter`, filter).pipe(
         catchError(this.handleError),
         map(this.jsonToUsers)
       )
-    }
-    */
+    }    
   
     getById(id: Guid) : Observable<Campaigns> {
       return this.http.get(`${this.apiPath}/${id}`).pipe(

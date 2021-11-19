@@ -17,7 +17,18 @@ namespace VaciControl.Controllers
             _campaignService = campaignService;
         }
 
-        //[HttpPost("filter")] //TODO: IMPLEMENTAR
+        [HttpPost("filter")]
+        public ActionResult<List<CampaignDto>> GetAll([FromBody] CampaignFilter filter)
+        {
+            var campaigns = _campaignService.GetAllWithConditions(filter);
+
+            if (campaigns == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(campaigns);
+        }
 
         [HttpGet("{id}")]
         public ActionResult<CampaignDto> GetById(Guid id)
