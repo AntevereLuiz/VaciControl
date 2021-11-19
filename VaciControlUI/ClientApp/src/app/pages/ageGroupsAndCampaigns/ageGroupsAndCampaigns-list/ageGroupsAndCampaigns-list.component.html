@@ -15,8 +15,7 @@
     <div class="card-header">
         Filtros
     </div>
-
-    <!-- QUANDO A TELA FICAR PRONTA REMOVER O COMENTÁRIO
+    
     <div class="card-body ps-3">
         <div class="row">
             <div class="form-group col-md-3">
@@ -55,45 +54,6 @@
             </div>
         </div>
     </div>
-    -->
-    <div class="card-body ps-3">
-        <div class="row">
-            <div class="form-group col-md-3">
-                <label for="campaignName">
-                    Campanha
-                </label>
-                <input type="text" id="campaignName" class="form-control">
-            </div>
-
-            <div class="form-group col-md-2">
-                <label for="disease">
-                    Doença
-                </label>
-                <input type="text" id="disease" class="form-control">
-            </div>                      
-
-            <div class="form-group col-md-2">
-                <label for="status">
-                    Status
-                </label>
-                <select class="form-select" id="status">
-                    <option *ngFor="let s of selectTypes" [ngValue]="s.valor">{{ s.nome }}</option>
-                  </select>
-            </div>
-
-            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
-                <a class="btn btn-warning" style="width: 130px;">
-                    Filtrar
-                </a>
-            </div>
-
-            <div class="form-group col-md-2 mt-auto" style="width: 150px;">
-                <a class="btn btn-danger" style="width: 130px;">
-                    Limpar Filtros
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 
 <table class="table table-hover">
@@ -105,26 +65,21 @@
             <th class="text-center">Ações</th>
         </tr>
     </thead>
-    <tbody>
-        <!--
-        <tr *ngFor="let ageGroupAndCampaign of ageGroupAndCampaigns">
+    <tbody>        
+        <tr *ngFor="let campaign of campaigns">
             <td>
-                <small>{{ ageGroupAndCampaign.campaignName }}</small>
+                <small>{{ campaign.campaignName }}</small>
             </td>
             <td>
-                <small>{{ ageGroupAndCampaign.disease }}</small>
-            </td>
+                <small>{{ campaign.disease?.nome }}</small>
+            </td>           
             <td>
-                <small>{{ ageGroupAndCampaign.status }}</small>
-            </td>            
-            <td>
-                <small>{{ ageGroupAndCampaign.status! | ativoinativo }}</small>
+                <small>{{ campaign.status! | ativoinativo }}</small>
             </td>
             <td class="text-center">
-                <a [routerLink]="['edit', ageGroupAndCampaign.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
-                <a (click)="delete(ageGroupAndCampaign)" class="btn btn-outline-danger btn-sm">Inativar</a>
+                <a [routerLink]="['edit', campaign.id]" class="btn btn-outline-info btn-sm me-1">Editar</a>
+                <a (click)="delete(campaign)" class="btn btn-outline-danger btn-sm">Inativar</a>
             </td>
-        </tr>
-        -->
+        </tr>       
     </tbody>
 </table>

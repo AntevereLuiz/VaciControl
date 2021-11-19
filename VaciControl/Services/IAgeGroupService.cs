@@ -12,6 +12,6 @@ namespace VaciControl.Services
         void Insert(AgeGroupDto ageGroup);
         void Update(AgeGroupDto ageGroup);
         void Delete(AgeGroupDto ageGroup);
-        //List<AgeGroupDto> GetAllWithConditions(AgeGroupFilter filter);       
+        //List<AgeGroupDto> GetAllWithConditions(AgeGroupFilter filter);
     }
 }

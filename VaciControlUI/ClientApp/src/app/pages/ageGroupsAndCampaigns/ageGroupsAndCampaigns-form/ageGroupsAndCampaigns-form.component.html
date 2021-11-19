@@ -18,7 +18,6 @@
             Informações sobre a Campanha e Faixas Etárias
         </div>
 
-
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-6">
@@ -30,8 +29,8 @@
                     <div class="text-danger"
                         *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.invalid && ageGroupsAndCampaignsForm.get('campaignName')?.touched">
                         <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.required">dado obrigatório</div>
-                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.minlength">deve ter no mínimo 10 caracteres</div>
-                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.maxlength">deve ter no máximo 50 caracteres</div>
+                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.minlength">deve ter no mínimo 5 caracteres</div>
+                        <div *ngIf="ageGroupsAndCampaignsForm.get('campaignName')?.errors?.maxlength">deve ter no máximo 100 caracteres</div>
                     </div>
                 </div>
 

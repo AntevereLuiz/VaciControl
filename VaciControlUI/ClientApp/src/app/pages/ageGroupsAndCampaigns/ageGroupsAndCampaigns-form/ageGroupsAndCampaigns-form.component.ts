@@ -11,6 +11,7 @@ import { AgeGroups } from './../models/AgeGroups.model';
 import { DiseaseService } from './../../disease/services/disease.service';
 import { DiseaseFilter } from '../../disease/filter/DiseaseFilter';
 import { Disease } from '../../disease/models/disease.model';
+import { each } from 'jquery';
 
 @Component({
     selector: 'app-ageGroupsAndCampaigns-form',
@@ -39,13 +40,15 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
     ngOnInit(): void {      
       this.setCurrentAction();        
          
-      if (this.currentAction = 'new') {
-        this.campaign?.ageGroups?.push(new AgeGroups(undefined, undefined, undefined, undefined, undefined));
+      if (this.currentAction == 'new') {
+        this.campaign?.ageGroups?.push(new AgeGroups(undefined, undefined, undefined, undefined, undefined));        
       } 
                
-      this.buildAgeGroupsAndCampaignsForm();  
-      this.inserir(0);      
-      this.loadAgeGroupsAndCampaigns();
+      this.buildAgeGroupsAndCampaignsForm();   
+      if (this.currentAction == 'new') {
+        this.inserir(0);
+      }      
+
       this.getDiseases();
     }
 
@@ -68,7 +71,7 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
     private buildAgeGroupsAndCampaignsForm() {
         this.ageGroupsAndCampaignsForm = this.formBuilder.group({
           id: [null],
-          campaignName: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+          campaignName: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
           status: [null],
           disease:[null],
           ageGroups: this.formBuilder.array([]),         
@@ -92,11 +95,27 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
     private loadAgeGroupsAndCampaigns() {
         if (this.currentAction == "edit") {
           this.route.paramMap.pipe(
-            switchMap(params => this.ageGroupsAndCampaignsService.getById(Guid.parse(String(params.get("id")))))
+            switchMap(params => this.ageGroupsAndCampaignsService.getById(Guid.parse(String(params.get("id")))))            
           ).subscribe(           
+            (campaign) => {this.campaign = campaign;
+              this.campaign.ageGroups?.forEach(element => {
+                element.dateIni = moment(element.dateIni).format('DD/MM/YYYY');
+                element.dateFim = moment(element.dateFim).format('DD/MM/YYYY');
+              });
+              
+              this.ageGroupsAndCampaignsForm.patchValue(this.campaign); 
+              for (let i = 0; i < this.campaign?.ageGroups?.length!; i++){               
+                this.editar(i);
+              }},
             (error) => toastr.error("Ocorreu um erro no servidor.")
           )
         }
+    }
+
+    public editar(i: number){            
+      const newAgeFormArray = this.ageGroupsAndCampaignsForm.get('ageGroups') as FormArray;
+      newAgeFormArray.push(this.createAgeFormGroup());           
+      this.ageGroupsAndCampaignsForm.get('ageGroups')?.patchValue(this.campaign.ageGroups);             
     }
 
     submitForm() {
@@ -138,8 +157,16 @@ export class AgeGroupsAndCampaignsFormComponent implements OnInit {
         )
     }
     
-    private updateAgeGroupsAndCampaigns() {
-        let ageGroupsAndCampaigns: Campaigns = Object.assign(new Campaigns(), this.ageGroupsAndCampaignsForm.value);
+    private updateAgeGroupsAndCampaigns() {        
+        let ageGroupsAndCampaigns: Campaigns = Object.assign(new Campaigns(), this.ageGroupsAndCampaignsForm.value);        
+
+        ageGroupsAndCampaigns.diseaseId = ageGroupsAndCampaigns.disease?.id;
+        
+        ageGroupsAndCampaigns?.ageGroups?.forEach(element => {
+          element.campaignId = ageGroupsAndCampaigns.id;
+          element.dateIni =  moment(element.dateIni, 'DD/MM/YYYY').toDate();
+          element.dateFim =  moment(element.dateFim, 'DD/MM/YYYY').toDate();          
+        });
         
         this.ageGroupsAndCampaignsService.update(ageGroupsAndCampaigns)
           .subscribe(

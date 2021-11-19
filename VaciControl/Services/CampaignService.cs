@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using VaciControl.DTOs;
 using VaciControl.Models;
 using VaciControl.Repositories;
 using VaciControl.UoW;
-
 namespace VaciControl.Services
 {
     public class CampaignService : ICampaignService
@@ -25,7 +24,7 @@ namespace VaciControl.Services
             _unitOfWork = unitOfWork;
             _campaignRepository = campaignRepository;
             _ageGroupRepository = ageGroupRepository;
-            _mapper = mapper;
+            _mapper = mapper;            
         }
 
         public List<CampaignDto> GetAll()
@@ -36,18 +35,21 @@ namespace VaciControl.Services
             return allCampaignsDto;
         }
 
-        //public list<campaigndto> getallwithconditions(campaignfilter filter)
-        //{
-        //    var campaigns = _campaignrepository.getallwithconditions(x => x.campaignname.contains(filter.campaignname) &&
-        //                                                          (filter.status == null || x.status == filter.status.value));
-        //    var campaignsdto = _mapper.map<list<campaigndto>>(campaigns);
+        public List<CampaignDto> GetAllWithConditions(CampaignFilter filter)
+        {
+            var campaigns = _campaignRepository.GetAll().Where(x => x.CampaignName.Contains(filter.CampaignName) &&                                                                    
+                                                                  x.Disease.Nome.Contains(filter.Disease) &&
+                                                                  (filter.Status == null || x.Status == filter.Status.Value))
+                                               .Include(x => x.Disease).ToList();
 
-        //    return campaignsdto;
-        //}
+            var campaignsdto = _mapper.Map<List<CampaignDto>>(campaigns);            
+
+            return campaignsdto;
+        }
 
         public CampaignDto GetById(Guid id)
         {
-            var campaign = _campaignRepository.GetById(x => x.Id == id);
+            var campaign = _campaignRepository.GetById(x => x.Id == id).Include(x => x.AgeGroups).Include(x => x.Disease).FirstOrDefault();
             var campaignDto = _mapper.Map<CampaignDto>(campaign);
 
             return campaignDto;
@@ -69,15 +71,20 @@ namespace VaciControl.Services
         }
 
         public void Update(CampaignDto campaignDto)
-        {
-            var campaign = _mapper.Map<Campaign>(campaignDto);
+        {                                               
+            var campaignMap = _mapper.Map<Campaign>(campaignDto);
 
-            _campaignRepository.Update(campaign);
+            var array = _ageGroupRepository.GetAll().Where(x => x.CampaignId == campaignDto.Id).ToList();
 
-            foreach (var ageGroupitem in campaign.AgeGroups)
+            foreach (var item in array)
             {
-                _ageGroupRepository.Update(ageGroupitem);
+                if (campaignMap.AgeGroups.FirstOrDefault(x => x.Id == item.Id) == null)
+                {
+                    _ageGroupRepository.Delete(item);
+                }
             }
+
+            _campaignRepository.Update(campaignMap);
 
             _unitOfWork.Commit();
         }
@@ -87,7 +94,7 @@ namespace VaciControl.Services
             campaignDto.Status = false;
             var campaign = _mapper.Map<Campaign>(campaignDto);
 
-            _campaignRepository.Delete(campaign);
+            _campaignRepository.Update(campaign);
             _unitOfWork.Commit();
         }
     }

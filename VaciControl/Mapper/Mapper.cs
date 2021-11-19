@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
 using VaciControl.DTOs;
 using VaciControl.Models;
 
