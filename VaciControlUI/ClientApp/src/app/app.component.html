@@ -1,14 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-1">
+            <img src="../assets/seringa.png" alt="">        
+          </div>
+          <div class="col-4" id="VaciControl">
+            VaciControl
+          </div>
+        </div>
+      </div>
+
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" aria-current="page">Início</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" aria-current="page" id="inicio">Início</a>
         </li>
 
         <li class="nav-item dropdown" *ngIf="!isAuthenticated">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="cadastrar">
             Cadastrar
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -23,11 +35,11 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/immunization" tabindex="-1" aria-disabled="true">Imunização</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/immunization" tabindex="-1" aria-disabled="true" id="imunizacao">Imunização</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/quit" tabindex="-1" aria-disabled="true">Sair</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/quit" tabindex="-1" aria-disabled="true" id="sair">Sair</a>
         </li>
 
       </ul>
